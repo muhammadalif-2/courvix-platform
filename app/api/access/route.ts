@@ -1,5 +1,5 @@
-import { canFeature } from "@/lib/feature-access";
-import { requireInviteRole, grantable, membershipStatements, inheritedPermissions } from "@/lib/access-control-server";
+import { canFeature, parsePermissions } from "@/lib/feature-access";
+import { requireInviteRole, grantable, membershipStatements, permitted } from "@/lib/access-control-server";
 import {
   canonicalSport,
   COUNTRIES,
@@ -300,7 +300,7 @@ export async function POST(req: Request) {
         .bind(i.club)
         .first<any>();
       writable(club);
-      const permissions=await inheritedPermissions(i.club,i.role,i.permissions);
+      const permissions=permitted(i.role,parsePermissions(i.permissions));
       const statements: D1PreparedStatement[] = [
         db().prepare("INSERT INTO cv_revision_guard(value) VALUES(COALESCE((SELECT CASE WHEN used_at IS NULL AND revoked_at IS NULL AND expires>? THEN 1 ELSE 0 END FROM cv_invites WHERE id=? AND email=?),0))").bind(Date.now(),i.id,who.email),
         ...(await membershipStatements(club,who,i.role,i.team,permissions)),
