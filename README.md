@@ -1,4 +1,6 @@
-# Courvix Platform — V1.0 rc.10
+# courvix-platform
+
+**Courvix Platform — V1.0 rc.10**
 
 Club and private trainer operations for Owner, Admin, Coach and Member. React/Vinext, Cloudflare D1/R2 and Better Auth accounts, with optional configured social providers. The landing page opens a separate interactive demo at `/demo` with five roles, an invitation inbox, simulated time, and payment reminders. Real accounts continue to use `/login`.
 
