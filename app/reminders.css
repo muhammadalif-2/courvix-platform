@@ -1,0 +1,182 @@
+.reminder-module {
+  display: grid;
+  gap: 22px;
+}
+.reminder-intro {
+  padding: 26px;
+  border: 1px solid #eddbcc;
+  background: #fff7ef;
+  border-radius: 14px;
+}
+.reminder-intro .eyebrow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.reminder-intro h2 {
+  font-size: 25px;
+  letter-spacing: -0.6px;
+  margin: 10px 0;
+}
+.reminder-intro p {
+  font-size: 13px;
+  color: #696e63;
+  line-height: 1.8;
+  max-width: 850px;
+}
+.reminder-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.reminder-metrics > div {
+  background: white;
+  padding: 20px;
+  border: 1px solid #e2e2d9;
+  border-radius: 12px;
+}
+.reminder-metrics small {
+  display: block;
+  color: #70796b;
+}
+.reminder-metrics strong {
+  display: block;
+  font-size: 30px;
+  margin-top: 10px;
+}
+.reminder-config {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 20px;
+}
+.reminder-config label,
+.renewal-decision label {
+  display: grid;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.reminder-config select,
+.reminder-config textarea,
+.reminder-config input[type="number"],
+.renewal-decision select,
+.renewal-decision textarea {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #d9dcd0;
+  border-radius: 8px;
+  background: white;
+  font: inherit;
+}
+.reminder-config small {
+  font-weight: 400;
+  color: #78816f;
+}
+.reminder-check {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 10px !important;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.reminder-check input {
+  width: auto !important;
+  margin-top: 3px;
+}
+.reminder-config .actions {
+  grid-column: 1/-1;
+  flex-wrap: wrap;
+}
+.reminder-invoices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 20px;
+}
+.reminder-invoices > article {
+  padding: 20px;
+  border: 1px solid #e8dfd4;
+  border-radius: 12px;
+  background: #fffdfa;
+}
+.reminder-invoice-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+.reminder-invoice-head p {
+  font-size: 12px;
+  color: #7c7d72;
+}
+.reminder-invoices article > p {
+  font-size: 12px;
+  line-height: 1.7;
+}
+.renewal-decision {
+  margin-top: 17px;
+  border-top: 1px solid #ece4d9;
+  padding-top: 15px;
+}
+.renewal-decision summary {
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+}
+.renewal-decision form {
+  display: grid;
+  gap: 14px;
+  margin-top: 15px;
+}
+.reminder-log {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  border-top: 1px solid #e8e4dc;
+  padding: 18px 0;
+}
+.reminder-log > svg {
+  color: #f46a1f;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.reminder-log > div {
+  flex: 1;
+}
+.reminder-log p {
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 0 0 7px;
+}
+.reminder-log small {
+  display: block;
+  color: #7c7d72;
+  font-size: 11px;
+}
+.reminder-clear {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 0;
+  color: #487345;
+}
+.demo-note {
+  color: #ad4d15 !important;
+  font-weight: 600;
+}
+@media (max-width: 700px) {
+  .reminder-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .reminder-invoices,
+  .reminder-config {
+    grid-template-columns: 1fr;
+  }
+  .reminder-invoice-head {
+    flex-wrap: wrap;
+  }
+  .reminder-intro {
+    padding: 20px;
+  }
+}

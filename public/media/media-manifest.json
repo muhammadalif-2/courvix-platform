@@ -1,0 +1,105 @@
+{
+  "revision": 2,
+  "concept": "The system behind every session",
+  "format": "H.264 / AAC",
+  "fps": 30,
+  "primary_color": "#ff641a",
+  "audio": "English synthetic neural narration, original instrumental score and original sound effects",
+  "voice": "af_heart",
+  "language": "English",
+  "records": "Illustrative sample records; not a screen recording or customer footage",
+  "videos": [
+    {
+      "file": "courvix-product-demo.mp4",
+      "duration": 203.4,
+      "width": 1920,
+      "height": 1080,
+      "aspect_ratio": "16:9",
+      "captions": "courvix-demo-captions.vtt",
+      "chapters": [
+        {
+          "start": 0,
+          "title": "The work behind the session"
+        },
+        {
+          "start": 12.6,
+          "title": "Two focused products"
+        },
+        {
+          "start": 27.433,
+          "title": "Set up your workspace"
+        },
+        {
+          "start": 41.567,
+          "title": "Club control room"
+        },
+        {
+          "start": 55.967,
+          "title": "Member 360 and quick edits"
+        },
+        {
+          "start": 71.767,
+          "title": "Invitations and role access"
+        },
+        {
+          "start": 89.567,
+          "title": "Dues, review and reminders"
+        },
+        {
+          "start": 108.233,
+          "title": "Visits and session packs"
+        },
+        {
+          "start": 122.1,
+          "title": "Payment to session credits"
+        },
+        {
+          "start": 140.867,
+          "title": "Appointments and classes"
+        },
+        {
+          "start": 157.933,
+          "title": "Client 360 and progress"
+        },
+        {
+          "start": 174.367,
+          "title": "Branches and oversight"
+        },
+        {
+          "start": 188.733,
+          "title": "Try your workflow"
+        }
+      ]
+    },
+    {
+      "file": "courvix-teaser-4x5.mp4",
+      "duration": 27.567,
+      "width": 1080,
+      "height": 1350,
+      "aspect_ratio": "4:5",
+      "captions": "courvix-teaser-captions.vtt",
+      "chapters": [
+        {
+          "start": 0,
+          "title": "hook"
+        },
+        {
+          "start": 4.0,
+          "title": "pain"
+        },
+        {
+          "start": 9.767,
+          "title": "choice"
+        },
+        {
+          "start": 15.967,
+          "title": "clarity"
+        },
+        {
+          "start": 22.0,
+          "title": "brand"
+        }
+      ]
+    }
+  ]
+}

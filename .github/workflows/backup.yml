@@ -1,0 +1,33 @@
+name: Encrypted D1 backup
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 19 * * *'
+permissions:
+  contents: read
+jobs:
+  backup:
+    # Deliberately opt-in: never guess production database/account identifiers.
+    if: vars.COURVIX_BACKUPS_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Export encrypted database
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          COURVIX_BACKUP_KEY: ${{ secrets.COURVIX_BACKUP_KEY }}
+          COURVIX_D1_DATABASE: ${{ vars.COURVIX_D1_DATABASE }}
+          COURVIX_WRANGLER_CONFIG: wrangler.production.json
+        run: node scripts/backup.mjs export
+      - uses: actions/upload-artifact@v4
+        with:
+          name: encrypted-d1-backup
+          path: work/backups/*.enc
+          retention-days: 14
+          if-no-files-found: error

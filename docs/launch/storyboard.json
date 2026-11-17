@@ -1,0 +1,135 @@
+{
+  "title": "COURVIX — Less Administration. More Game.",
+  "status": "Production preparation; final screen composites await actual app captures",
+  "duration": 85,
+  "width": 3840,
+  "height": 2160,
+  "fps": 30,
+  "voice": "af_heart",
+  "speed": 1.05,
+  "brand": {
+    "primary": "#ff641a",
+    "dark": "#191817",
+    "light": "#fffaf4",
+    "font": "Inter"
+  },
+  "cta": "Discover COURVIX",
+  "cta_url": "https://courvix-v1-review.tuftedleaf.chatgpt.site",
+  "shots": [
+    {
+      "id": "complexity",
+      "start": 0,
+      "duration": 9,
+      "emotion": "Complexity",
+      "headline": "The work behind every game.",
+      "narration": "Behind every great game, there's work no one sees. Teams to coordinate. Sessions to plan. Payments to follow up.",
+      "visual": "Authentic coach preparing training, athlete close-up, training calendar. Three controlled cuts. Separate task fragments accumulate outside the product; do not invent application UI.",
+      "camera": "Sport detail macro; slow dolly into training calendar.",
+      "sound": "Atmospheric stadium air, sparse harmonic piano, low pulse. Tension without aggressive impacts.",
+      "screen": null
+    },
+    {
+      "id": "frustration",
+      "start": 9,
+      "duration": 8,
+      "emotion": "Frustration",
+      "headline": "When everything feels scattered.",
+      "narration": "When that work lives in scattered messages and spreadsheets, the next session becomes harder than it should be.",
+      "visual": "Academy administrator and team manager dealing with loose task fragments. Calendar grid aligns with the real digital schedule in the next scene. No fabricated customer testimonial.",
+      "camera": "Controlled push-in; tighter framing creates tension.",
+      "sound": "Soft overlapping UI notifications dissolve to a short breath of silence.",
+      "screen": null
+    },
+    {
+      "id": "discovery",
+      "start": 17,
+      "duration": 8,
+      "emotion": "Discovery",
+      "headline": "Sports Management, Reimagined.",
+      "narration": "Meet Courvix. Sports management, reimagined. One clear home for the work behind your sport.",
+      "visual": "Scattered task fragments converge into the actual Club control room on an unbranded graphite laptop. Courvix orange establishes clarity.",
+      "camera": "Laptop reveal with a gentle 12-degree orbital move and subtle dolly-in.",
+      "sound": "Warm synth rise, a soft bass impact and a restrained logo accent.",
+      "screen": "desktop-club-control.png"
+    },
+    {
+      "id": "simplicity",
+      "start": 25,
+      "duration": 10,
+      "emotion": "Simplicity",
+      "headline": "Everything in One Place.",
+      "narration": "Bring member profiles, teams, schedules and attendance together. So every coach knows who's training, where, and when.",
+      "visual": "Actual member overview, schedule and attendance captures. Each detail appears in sequence; enlarge one readable region at a time. Physical calendar match-cut becomes the digital schedule.",
+      "camera": "Screen macro; pull back from member context to laptop.",
+      "sound": "Light synchronized confirmations, controlled electronic percussion enters.",
+      "screen": "desktop-member-360.png",
+      "additional_screens": ["desktop-schedule.png", "tablet-attendance.png"]
+    },
+    {
+      "id": "control",
+      "start": 35,
+      "duration": 10,
+      "emotion": "Control",
+      "headline": "Organize with Confidence.",
+      "narration": "Keep payment records visible, review submissions, and follow up on unpaid dues. Less chasing. A clearer next action.",
+      "visual": "Actual invoice/payment review and reminder controls. Visibly retain manual receipt verification; never imply automatic bank settlement or active unconfigured delivery.",
+      "camera": "Laptop screen dolly-in; a precise highlight follows the actual review row.",
+      "sound": "Subtle interface click and low data pulse; narration remains dominant.",
+      "screen": "desktop-payment-review.png"
+    },
+    {
+      "id": "training",
+      "start": 45,
+      "duration": 10,
+      "emotion": "Control",
+      "headline": "Built for the Way You Coach.",
+      "narration": "For personal trainers, connect client goals, appointments and session packs. From verified payment to reserved credits and completed training.",
+      "visual": "Authentic trainer guiding a client leads into real Training control room, session pack and appointment records. Show the existing 1/4/8/16 offer concept and actual credit transitions.",
+      "camera": "Sports motion match-cut to credit motion; tablet at a physically plausible angle.",
+      "sound": "Selective sport impact, warm bass rhythm, UI reservation/completion accents.",
+      "screen": "desktop-training-control.png",
+      "additional_screens": ["tablet-training-bookings.png"]
+    },
+    {
+      "id": "growth",
+      "start": 55,
+      "duration": 10,
+      "emotion": "Growth",
+      "headline": "Understand Your Operations.",
+      "narration": "See the full member story in one view. Oversee branches, then move into the workspace that needs your attention.",
+      "visual": "Actual combined member/client overview and real Network overview. Use only operational counts present in the app. No invented performance uplift, predictive analytics or customer statistics.",
+      "camera": "Expand out from an actual local workspace to the existing network view.",
+      "sound": "Music opens into an uplifting progression; subtle data visualization pulses.",
+      "screen": "desktop-network.png"
+    },
+    {
+      "id": "connected",
+      "start": 65,
+      "duration": 10,
+      "emotion": "Growth",
+      "headline": "Stay Connected.",
+      "narration": "A connected experience for the people behind the session. Clear roles, shared context, and more room to focus on coaching.",
+      "visual": "Laptop, tablet and smartphone use real captures at their respective viewports. Move from desk to coaching environment. Responsive website access only; do not imply native apps or offline access.",
+      "camera": "Motivated laptop-to-tablet-to-phone transition; separate physical devices remain believable.",
+      "sound": "Elegant swipe, wider stereo image and a controlled musical rise.",
+      "screen": "mobile-member.png",
+      "additional_screens": [
+        "tablet-attendance.png",
+        "mobile-training-client.png"
+      ]
+    },
+    {
+      "id": "inspiration",
+      "start": 75,
+      "duration": 10,
+      "emotion": "Inspiration",
+      "headline": "Less Administration. More Game.",
+      "narration": "Built for the way sports move. Courvix. Less administration. More game. Discover Courvix.",
+      "visual": "Unified laptop/tablet/phone hero composition. Actual Courvix logo in orange with a subtle moving highlight. CTA: Discover COURVIX. End in a clean charcoal frame.",
+      "camera": "Slow hero dolly-in and restrained orbit; no excessive neon or holograms.",
+      "sound": "Emotional synth lift and distinctive three-note original sonic mark; clean final decay.",
+      "screen": "desktop-club-control.png",
+      "additional_screens": ["tablet-attendance.png", "mobile-member.png"]
+    }
+  ]
+}

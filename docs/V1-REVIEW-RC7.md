@@ -1,0 +1,11 @@
+# Courvix rc.7 — Connected control rooms and media
+
+Club and PT now have separate staff control-room pages (`module=ControlRoom`). These are composite views of existing records, not a new data store. Club joins teams/coaches, schedules/programs, attendance, dues/payments and related member guidance. PT joins clients, appointments/outcomes, packs/credits, payment review, progress, classes, trainer workload, offers and policies.
+
+Each page has a visible attention queue, searchable/paginated people roster, and an all-sections member/client overview. Selecting a person updates the combined view; source details and authorized edits remain available. Updates refresh the source records rather than inventing cached totals. Club edits started here retain the control-room context.
+
+Club aggregation applies the existing permission scope and workspace filter again. Staff-only helper functions reject member roles. Coaches do not receive financial projections, private invoices/receipts or membership amounts in the composite model. PT financial projections are admin-only; trainer views use the already-scoped API response and explicit finance suppression. No new schema migration or elevated API permission is added.
+
+The public presentation adds an 80-second landscape product film, 22-second vertical social teaser, English captions, native media controls, chapter seeking and download links. See MEDIA-KIT.md for specifications and reproduction. These are illustrative animated explainers with original instrumental audio, not narrated customer recordings. Sports visuals combine the existing track photo with original court/runner/strength vector animation, manual selectors, pause and reduced-motion support. Shared gutters, nested forms, modal spacing and dense tables receive a spacing pass.
+
+Validation covers pure aggregate joins/privacy, existing domain/demo/API suites, build/type checks, media dimensions/duration/full decode and public media/route responses. Browser interaction/mobile and real-account acceptance still require actual device review because browser-control tools are unavailable in this environment. Production sender/bank, paused scheduling, recovery and pilot gates remain as described in RELEASE.md. No real messages, payments or social posts are sent during verification.

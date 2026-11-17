@@ -1,0 +1,15 @@
+import assert from "node:assert/strict";
+import {effectivePermissions,normalizePermissions,canFeature} from "../lib/feature-access.ts";
+import {createDemoState,simulateRequest,demoIdentity} from "../lib/demo-engine.ts";
+import {scoped,mergeScoped} from "../lib/access-policy.ts";
+const s=createDemoState(),owner=demoIdentity(s);
+assert.equal(canFeature(owner,"Access",true),true);
+simulateRequest(s,"/api/access-control","POST",{action:"defaults",role:"Coach",permissions:{Members:"none",Training:"view"}});
+s.role="Coach";const coach=demoIdentity(s),visible=scoped(s.data,coach);assert.equal(visible.records.Members.length,0);assert.equal(canFeature(coach,"Training"),true);assert.equal(canFeature(coach,"Training",true),false);
+assert.throws(()=>normalizePermissions("Coach",{Invoices:"view"}));assert.throws(()=>normalizePermissions("Member",{Access:"edit"}));assert.throws(()=>normalizePermissions("Member",{unknown:"edit"}));
+const current=scoped(s.data,coach);current.records.Training.push({id:"new-training",club:s.club,name:"Must not save"});assert.throws(()=>mergeScoped(s.data,current,coach),/cannot edit/);
+assert.equal(canFeature({...coach,isOwner:true},"Members",true),true);
+assert.equal(effectivePermissions("Member",{Announcements:"none"},{Announcements:"view"}).Announcements,"view");
+s.role="Owner";const access=simulateRequest(s,"/api/access-control").value;assert.ok(access.features.length>10);assert.equal(access.defaults.Coach.Members,"none");
+const link=simulateRequest(s,"/api/access-control","POST",{action:"create-link",role:"Member",team:s.data.records.Teams.find(t=>t.club===s.club).id,name:"Demo intake",days:7,maxUses:2}).value;assert.ok(link.url.includes("demo.example.test"));simulateRequest(s,"/api/access-control","POST",{action:"revoke-link",id:link.id});assert.ok(simulateRequest(s,"/api/access-control").value.links[0].revoked_at);
+console.log("PASS feature access: defaults/overrides, immutable Owner authority, Coach/Member ceilings, module read/write denial and demo role-link controls.");

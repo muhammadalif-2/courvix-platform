@@ -1,0 +1,24 @@
+# LOCAL ONLY. Never set COURVIX_LOCAL_AUTH in hosted production.
+COURVIX_LOCAL_AUTH="1"
+COURVIX_ADMIN_EMAILS="your-admin@example.com"
+COURVIX_SUPPORT_EMAIL="courvix.id@gmail.com"
+# Configure these in hosting secrets/settings before launch:
+# RESEND_API_KEY=""
+# COURVIX_FROM_EMAIL="Courvix <undangan@your-verified-domain>"
+# COURVIX_BANK_NAME=""
+# COURVIX_BANK_ACCOUNT=""
+# COURVIX_BANK_HOLDER=""
+
+# Scheduled reminder writer (set in hosted secrets, never in source)
+# COURVIX_APP_URL="https://your-site.chatgpt.site"
+# COURVIX_REMINDER_JOB_KEY=""
+
+# Portable account authentication. Generate a random secret of at least 32 characters.
+# COURVIX_AUTH_SECRET=""
+# COURVIX_AUTH_URL="https://app.your-domain.com"
+# GOOGLE_CLIENT_ID=""
+# GOOGLE_CLIENT_SECRET=""
+# MICROSOFT_CLIENT_ID=""
+# MICROSOFT_CLIENT_SECRET=""
+# Optional Sites identity bridge; leave absent on standalone hosting.
+# COURVIX_SITES_AUTH="1"

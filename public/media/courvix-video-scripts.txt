@@ -1,0 +1,61 @@
+COURVIX — THE SYSTEM BEHIND EVERY SESSION
+English narration scripts / Revision 2
+
+DEMO
+
+1. THE WORK BEHIND THE SESSION
+Every great session starts before the first whistle. But scattered schedules, payment follow-ups and missing member details can pull your attention away from coaching. Meet Courvix.
+
+2. TWO FOCUSED PRODUCTS
+One brand. Two focused products. Club Management organizes members, teams and recurring dues. Personal Training connects clients, appointments and paid session packs. Choose the workflow that fits your business.
+
+3. SET UP YOUR WORKSPACE
+Set up your workspace with your sport, location, currency and time zone. Review your subscription in Billing. Submitted payments need verification before approval. Then build the structure your staff will work in.
+
+4. CLUB CONTROL ROOM
+Open the Club control room for the full operational picture. See your roster, teams, coaches, upcoming training and payment reviews together. The attention queue helps you find the records that need a next step.
+
+5. MEMBER 360 AND QUICK EDITS
+Choose a member to open their complete overview. Their profile, team, coach, schedule, attendance and payment records stay connected on one page. Open a source record to inspect or update the detail, with your existing permissions.
+
+6. INVITATIONS AND ROLE ACCESS
+Invite an administrator, coach, member or client using the email they use for ChatGPT. They accept the single-use invitation and complete their profile. Each role gets its own view. Coaches and clients do not receive administrator financial access.
+
+7. DUES, REVIEW AND REMINDERS
+Track recurring dues and review payment submissions against your actual receipts. An administrator records verification; Courvix does not automatically settle bank transfers. Configured reminders follow unpaid balances and stop after payment or a declined renewal.
+
+8. VISITS AND SESSION PACKS
+For Personal Training, create an offer for a single visit, or a pack of four, eight or sixteen sessions. Set the price, expiry and booking policies clearly, so clients know what they are buying before they pay.
+
+9. PAYMENT TO SESSION CREDITS
+The client submits their payment reference. You verify the receipt to activate the pack. Booking reserves one available credit. Completing the session uses that credit once. Purchased, available, reserved and used sessions stay visible, so the next booking starts with a clear balance.
+
+10. APPOINTMENTS AND CLASSES
+Manage one-to-one appointments and shared classes with assigned trainers, session times and class capacity. Confirm requests, check availability and keep booking conflicts out of the schedule. Cancellations and no-shows follow the terms attached to the booking.
+
+11. CLIENT 360 AND PROGRESS
+After training, record the outcome and progress. The Training control room brings each client's goals, appointments, packs, balances and progress together. Use that context to plan the next session, instead of rebuilding the story from separate tabs.
+
+12. BRANCHES AND OVERSIGHT
+Managing more than one club location or training workspace? Use the network view for oversight, then switch into the location you need. Keep local records and role access clear as your operation grows.
+
+13. TRY YOUR WORKFLOW
+Your people. Your progress. The work behind every session, connected. Explore the interactive demo as an owner, coach or member. Choose Club Management or Personal Training, and find your workflow with Courvix.
+
+TEASER
+
+1. HOOK
+Your next session deserves a better system.
+
+2. PAIN
+Less chasing payments. Fewer scattered schedules. More time to coach.
+
+3. CHOICE
+Courvix connects Club Management and Personal Training, in two focused products.
+
+4. CLARITY
+See your people, bookings, payment records and session credits, in one clear view.
+
+5. BRAND
+Built for sport. Designed for management. Explore Courvix.
+

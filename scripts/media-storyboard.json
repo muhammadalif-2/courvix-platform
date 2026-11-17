@@ -1,0 +1,224 @@
+{
+  "concept": "The system behind every session",
+  "voice": "af_heart",
+  "speed": 1.02,
+  "demo": [
+    {
+      "id": "opening",
+      "chapter": "The work behind the session",
+      "title": ["BUILT FOR SPORT.", "DESIGNED FOR", "MANAGEMENT."],
+      "label": "THE SYSTEM BEHIND EVERY SESSION",
+      "kind": "opening",
+      "sport": "basketball",
+      "lines": [
+        "Every great session starts before the first whistle.",
+        "But scattered schedules, payment follow-ups and missing member details can pull your attention away from coaching.",
+        "Meet Courvix."
+      ]
+    },
+    {
+      "id": "products",
+      "chapter": "Two focused products",
+      "title": ["TWO PRODUCTS.", "YOUR WAY", "TO WORK."],
+      "label": "CHOOSE YOUR WORKFLOW",
+      "kind": "products",
+      "sport": "training",
+      "lines": [
+        "One brand. Two focused products.",
+        "Club Management organizes members, teams and recurring dues.",
+        "Personal Training connects clients, appointments and paid session packs.",
+        "Choose the workflow that fits your business."
+      ]
+    },
+    {
+      "id": "setup",
+      "chapter": "Set up your workspace",
+      "title": ["START WITH", "THE RIGHT", "FOUNDATION."],
+      "label": "YOUR BUSINESS / YOUR WORKSPACE",
+      "kind": "setup",
+      "sport": "track",
+      "lines": [
+        "Set up your workspace with your sport, location, currency and time zone.",
+        "Review your subscription in Billing. Submitted payments need verification before approval.",
+        "Then build the structure your staff will work in."
+      ]
+    },
+    {
+      "id": "club",
+      "chapter": "Club control room",
+      "title": ["YOUR CLUB.", "THE FULL", "PICTURE."],
+      "label": "CLUB MANAGEMENT / CONTROL ROOM",
+      "kind": "club",
+      "sport": "basketball",
+      "lines": [
+        "Open the Club control room for the full operational picture.",
+        "See your roster, teams, coaches, upcoming training and payment reviews together.",
+        "The attention queue helps you find the records that need a next step."
+      ]
+    },
+    {
+      "id": "member",
+      "chapter": "Member 360 and quick edits",
+      "title": ["ONE MEMBER.", "EVERY", "CONNECTION."],
+      "label": "MEMBER 360 / CONNECTED RECORDS",
+      "kind": "member",
+      "sport": "basketball",
+      "lines": [
+        "Choose a member to open their complete overview.",
+        "Their profile, team, coach, schedule, attendance and payment records stay connected on one page.",
+        "Open a source record to inspect or update the detail, with your existing permissions."
+      ]
+    },
+    {
+      "id": "roles",
+      "chapter": "Invitations and role access",
+      "title": ["BRING YOUR", "PEOPLE", "TOGETHER."],
+      "label": "INVITE / ACCEPT / GET TO WORK",
+      "kind": "roles",
+      "sport": "track",
+      "lines": [
+        "Invite an administrator, coach, member or client using the email they use for ChatGPT.",
+        "They accept the single-use invitation and complete their profile.",
+        "Each role gets its own view. Coaches and clients do not receive administrator financial access."
+      ]
+    },
+    {
+      "id": "dues",
+      "chapter": "Dues, review and reminders",
+      "title": ["LESS CHASING.", "CLEARER", "FOLLOW-UP."],
+      "label": "CLUB DUES / PAYMENT REVIEW",
+      "kind": "dues",
+      "sport": "basketball",
+      "lines": [
+        "Track recurring dues and review payment submissions against your actual receipts.",
+        "An administrator records verification; Courvix does not automatically settle bank transfers.",
+        "Configured reminders follow unpaid balances and stop after payment or a declined renewal."
+      ]
+    },
+    {
+      "id": "offers",
+      "chapter": "Visits and session packs",
+      "title": ["SELL THE", "WAY YOU", "COACH."],
+      "label": "PERSONAL TRAINING / OFFERS",
+      "kind": "offers",
+      "sport": "training",
+      "lines": [
+        "For Personal Training, create an offer for a single visit, or a pack of four, eight or sixteen sessions.",
+        "Set the price, expiry and booking policies clearly, so clients know what they are buying before they pay."
+      ]
+    },
+    {
+      "id": "credits",
+      "chapter": "Payment to session credits",
+      "title": ["PAID.", "RESERVED.", "COMPLETED."],
+      "label": "PERSONAL TRAINING / SESSION CREDITS",
+      "kind": "credits",
+      "sport": "training",
+      "lines": [
+        "The client submits their payment reference. You verify the receipt to activate the pack.",
+        "Booking reserves one available credit.",
+        "Completing the session uses that credit once.",
+        "Purchased, available, reserved and used sessions stay visible, so the next booking starts with a clear balance."
+      ]
+    },
+    {
+      "id": "booking",
+      "chapter": "Appointments and classes",
+      "title": ["THE RIGHT", "SESSION.", "THE RIGHT TIME."],
+      "label": "APPOINTMENTS / CLASSES / CAPACITY",
+      "kind": "booking",
+      "sport": "training",
+      "lines": [
+        "Manage one-to-one appointments and shared classes with assigned trainers, session times and class capacity.",
+        "Confirm requests, check availability and keep booking conflicts out of the schedule.",
+        "Cancellations and no-shows follow the terms attached to the booking."
+      ]
+    },
+    {
+      "id": "progress",
+      "chapter": "Client 360 and progress",
+      "title": ["EVERY CLIENT.", "EVERY", "NEXT STEP."],
+      "label": "PERSONAL TRAINING / CLIENT 360",
+      "kind": "progress",
+      "sport": "training",
+      "lines": [
+        "After training, record the outcome and progress.",
+        "The Training control room brings each client's goals, appointments, packs, balances and progress together.",
+        "Use that context to plan the next session, instead of rebuilding the story from separate tabs."
+      ]
+    },
+    {
+      "id": "network",
+      "chapter": "Branches and oversight",
+      "title": ["LOCAL DETAIL.", "A WIDER", "PERSPECTIVE."],
+      "label": "MULTIPLE WORKSPACES / CLEAR OVERSIGHT",
+      "kind": "network",
+      "sport": "track",
+      "lines": [
+        "Managing more than one club location or training workspace? Use the network view for oversight, then switch into the location you need.",
+        "Keep local records and role access clear as your operation grows."
+      ]
+    },
+    {
+      "id": "closing",
+      "chapter": "Try your workflow",
+      "title": ["MORE TIME", "FOR THE", "NEXT SESSION."],
+      "label": "YOUR SPORT / YOUR PEOPLE / COURVIX",
+      "kind": "closing",
+      "sport": "basketball",
+      "lines": [
+        "Your people. Your progress. The work behind every session, connected.",
+        "Explore the interactive demo as an owner, coach or member.",
+        "Choose Club Management or Personal Training, and find your workflow with Courvix."
+      ]
+    }
+  ],
+  "teaser": [
+    {
+      "id": "hook",
+      "title": ["YOUR NEXT", "SESSION", "STARTS HERE."],
+      "label": "THE SYSTEM BEHIND THE SPORT",
+      "kind": "opening",
+      "sport": "basketball",
+      "lines": ["Your next session deserves a better system."]
+    },
+    {
+      "id": "pain",
+      "title": ["LESS CHASING.", "MORE", "COACHING."],
+      "label": "PEOPLE / SCHEDULES / PAYMENTS",
+      "kind": "dues",
+      "sport": "track",
+      "lines": [
+        "Less chasing payments. Fewer scattered schedules. More time to coach."
+      ]
+    },
+    {
+      "id": "choice",
+      "title": ["YOUR CLUB.", "YOUR CLIENTS.", "TWO PRODUCTS."],
+      "label": "CLUB MANAGEMENT + PERSONAL TRAINING",
+      "kind": "products",
+      "sport": "training",
+      "lines": [
+        "Courvix connects Club Management and Personal Training, in two focused products."
+      ]
+    },
+    {
+      "id": "clarity",
+      "title": ["ONE VIEW.", "YOUR NEXT", "MOVE."],
+      "label": "CONNECTED RECORDS / CLEAR NEXT STEPS",
+      "kind": "club",
+      "sport": "basketball",
+      "lines": [
+        "See your people, bookings, payment records and session credits, in one clear view."
+      ]
+    },
+    {
+      "id": "brand",
+      "title": ["BUILT FOR SPORT.", "DESIGNED FOR", "MANAGEMENT."],
+      "label": "EXPLORE COURVIX / FIND YOUR WORKFLOW",
+      "kind": "closing",
+      "sport": "training",
+      "lines": ["Built for sport. Designed for management. Explore Courvix."]
+    }
+  ]
+}

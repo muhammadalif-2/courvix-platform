@@ -1,0 +1,30 @@
+[
+  {
+    "file": "basketball-coach.mp4",
+    "creator": "cottonbro studio",
+    "page": "https://www.pexels.com/video/coach-giving-advice-to-female-basketball-players-6767493/",
+    "download_url": "https://videos.pexels.com/video-files/6767493/6767493-uhd_4096_2160_25fps.mp4",
+    "license": "https://www.pexels.com/license/",
+    "width": 4096,
+    "height": 2160,
+    "fps": "25/1",
+    "duration": "23.720000",
+    "sha256": "16e8c95976a18c255b9027ee6e5932be8633e02c24c4c17eeac8b24a546f42be",
+    "status": "Source acquired; final edit must avoid unrelated visible logos and endorsement claims",
+    "rotation_metadata": []
+  },
+  {
+    "file": "personal-trainer.mp4",
+    "creator": "Cliff Booth",
+    "page": "https://www.pexels.com/video/a-woman-doing-rope-exercise-with-personal-trainer-4108055/",
+    "download_url": "https://videos.pexels.com/video-files/4108055/4108055-uhd_3840_2160_25fps.mp4",
+    "license": "https://www.pexels.com/license/",
+    "width": 3840,
+    "height": 2160,
+    "fps": "25/1",
+    "duration": "7.320000",
+    "sha256": "54fba565dbff90d494d99d773699978bd2ba6d058c9da822640283358193e3f3",
+    "status": "Source acquired; final edit must avoid unrelated visible logos and endorsement claims",
+    "rotation_metadata": []
+  }
+]
