@@ -22,7 +22,7 @@ New pages: `/compare`, `/trust`, `/help`, `/terms`, `/privacy`, `/legal/id`. `/p
 - Announcements, appointments and payment/subscription status: viewable records, not universal email/push delivery.
 - A provider `Sent` response is not evidence of inbox delivery, reading or every user receiving information. Real recipient acceptance and provider delivery monitoring remain pending.
 
-The selected private review Site has one allowed account, no attached schedule, and no configured Resend sender, native auth secret or OAuth provider keys in its current environment revision. This audit does not silently change any of those settings.
+At the initial audit the Site was owner-private. At final publication its access policy was public (revision 2, updated 18 November 2026); the update preserves that audience rather than changing access. The environment remains revision 1, with no attached schedule or configured Resend sender, native auth secret or OAuth provider keys. The update does not enable those services.
 
 ## Legal review — limits and improvements
 
