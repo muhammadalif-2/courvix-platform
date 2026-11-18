@@ -5,7 +5,6 @@ import {BrandLogo} from "@/components/brand";
 import AccountProfile from "./account-profile";
 import {accessAction} from "./access-client";
 import {PreferenceControls} from "./preferences";
-import "./onboarding.css";
 export default function WaitingRoom(){
  const [d,setD]=useState<any>(null),[error,setError]=useState(""),[busy,setBusy]=useState(false),[profile,setProfile]=useState(false);const lock=useRef(false);
  async function load(){const r=await fetch("/api/lobby",{cache:"no-store"});if(r.status===401){location.replace("/login?next=/waiting-room");return}const v:any=await r.json();if(!r.ok)throw Error(v.error);setD(v);}

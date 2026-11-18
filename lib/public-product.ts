@@ -1,0 +1,54 @@
+// Public copy is shared by pricing, comparison, and help. Keep it aligned with V1 behavior.
+export type PublicProduct = "club" | "training";
+export const PUBLIC_PRICING = { starter: 250000, pro: 500000, trialDays: 14, termDays: 30, currency: "IDR" } as const;
+export const productCopy = {
+  club: {
+    name: "Club Management", audience: "Clubs, academies & sports communities", noun: "members",
+    headline: "A stronger club starts with a clearer day.",
+    description: "Keep people, groups, training and club dues connected, so your team can spend more time on the people who show up.",
+    demo: "/demo?product=club&role=Owner&module=ControlRoom",
+    outcomes: ["Find the member and the context together", "Give coaches a clear training-day view", "Keep dues review and follow-ups organized"],
+    included: [
+      ["Member profiles & groups", "Connect each person to their group, coach and activity."],
+      ["Schedules & attendance", "Organize sessions, venues and attendance history."],
+      ["Membership plans & dues", "Track member plans, invoice periods and outstanding dues."],
+      ["Payment review & history", "Review transfer references and preserve transaction corrections."],
+      ["Payment follow-ups", "Use reminder rules and history; email requires an enabled sender and schedule."],
+      ["Club control room", "See linked member records and the next action from one place."],
+      ["People & permissions", "Invite admins, coaches and members with role and feature limits."],
+      ["Branch oversight & exports", "Owner oversight across owned locations; each location has its own subscription."],
+    ],
+    steps: ["Create the club", "Invite your people", "Run training", "Review dues"],
+    comparison: [
+      ["Find a member’s full context", "Roster, chat history and separate attendance sheets", "Member details linked to groups, sessions and dues"],
+      ["Run a training day", "Calendar entries plus a separate attendance list", "Group-linked schedules and attendance records"],
+      ["Follow up on dues", "Match transfers, sheets and individual messages", "Invoice status, manual verification and follow-up history"],
+      ["Give people the right access", "Share files and manage separate permissions", "Workspace roles, feature permissions and scoped records"],
+    ],
+  },
+  training: {
+    name: "Personal Training", audience: "Independent trainers & coaching studios", noun: "clients",
+    headline: "Every paid session. Every next step. In view.",
+    description: "Connect clients, visits, session packs and appointments. Know what was bought, what is booked and what is left to train.",
+    demo: "/demo?product=training&workspace=demo-nusa&role=Owner&module=ControlRoom",
+    outcomes: ["See paid, reserved and remaining sessions clearly", "Keep appointments connected to the right package", "Carry the client’s progress into the next session"],
+    included: [
+      ["Client profiles & trainer assignment", "Keep goals, client details and assigned coaching together."],
+      ["Per-visit & session-pack offers", "Create single visits, 4/8/16 packs or a custom session count."],
+      ["Purchase terms & payment review", "Keep purchased price and terms recorded; activate credits after verification."],
+      ["Private appointments", "Reserve an available paid credit with trainer and client conflict checks."],
+      ["Small-group classes", "Publish classes with capacity limits and participant bookings."],
+      ["Session ledger & progress", "Record completion, remaining credits and training progress."],
+      ["Cancellation & no-show policies", "Display booking terms and retain the policy attached to the appointment."],
+      ["Training control room & access", "Review connected client records with trainer/client privacy boundaries."],
+    ],
+    steps: ["Create your offers", "Verify the purchase", "Book & train", "Track the balance"],
+    comparison: [
+      ["Track a session pack", "Sales notes plus a manually updated session balance", "Purchase, expiry, reservations and session ledger connected"],
+      ["Book a paid appointment", "Calendar availability checked against another record", "Booking checks available credits, time conflicts and validity"],
+      ["Record a completed session", "Update the calendar, balance sheet and progress notes", "Completion records progress and consumes the reserved credit once"],
+      ["Handle a cancellation", "Check messages and manually reconcile the balance", "Apply the appointment’s saved policy and preserve correction history"],
+    ],
+  },
+} as const;
+export function parsePublicProduct(value:unknown):PublicProduct{return value === "training" ? "training" : "club";}

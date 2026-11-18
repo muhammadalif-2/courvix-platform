@@ -33,6 +33,7 @@ import { ProductExplorer, ExperienceShowcase } from "./product-explorer";
 import "./premium.css";
 import { DemoVideo, SportsStory, SocialTeaser } from "./media-showcase";
 import ReferenceHome from "./reference-home";
+import PricingExperience from "./pricing-experience";
 const clubDemo = "/demo?product=club&role=Owner";
 const ptDemo = "/demo?product=training&workspace=demo-nusa&role=Owner";
 const faqs = [
@@ -42,7 +43,7 @@ const faqs = [
   ],
   [
     "Do my members and clients need an account?",
-    "Yes. Courvix currently uses ChatGPT sign-in. Invite people using the email on their ChatGPT account. Each person gets access to the records allowed by their role.",
+    "Yes. Each person uses a verified Courvix account and accepts an invitation or requests access. Email and social sign-in options depend on the enabled deployment. Each person sees the records permitted by their role.",
   ],
   [
     "How do payments work?",
@@ -89,6 +90,7 @@ export function PublicHeader({ active = "" }: { active?: string }) {
           ["Products", "/products", "products"],
           ["How it works", "/platform", "platform"],
           ["Pricing", "/pricing", "pricing"],
+          ["Why Courvix", "/compare", "compare"],
           ["Contact", "/contact", "contact"],
         ].map(([label, href, key]) => (
           <a
@@ -146,13 +148,17 @@ export function PublicFooter() {
           <a href="/clubs">Club Management</a>
           <a href="/personal-training">Personal Training</a>
           <a href="/platform">How it works</a>
-          <a href="/pricing">Pricing</a>
+          <a href="/pricing/club">Club pricing</a>
+          <a href="/pricing/personal-training">Training pricing</a>
         </div>
         <div>
           <b>Explore</b>
           <a href="/demo">Interactive demo</a>
           <a href="/sports">Sports & disciplines</a>
           <a href="/club-life">The coaching journal</a>
+          <a href="/compare">Compare the workflow</a>
+          <a href="/trust">Data & trust</a>
+          <a href="/help">Help center</a>
           <a href="/custom">Custom projects</a>
         </div>
         <div>
@@ -167,7 +173,9 @@ export function PublicFooter() {
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Courvix.</span>
         <span>Built around the way you coach.</span>
-        <a href="/policies">Privacy & terms</a>
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/policies">All policies</a>
       </div>
     </footer>
   );
@@ -427,78 +435,6 @@ function SectionHeading({
     </div>
   );
 }
-function Pricing() {
-  return (
-    <>
-      <div className="m-pricing">
-        {[
-          {
-            name: "Starter",
-            price: "250,000",
-            tag: "YOUR WORKFLOW, YOUR WAY",
-            text: "For owners ready to set up and run their own workspace.",
-            features: [
-              "Your choice of Club or Personal Training",
-              "The core tools for your selected product",
-              "Role-based access and scoped exports",
-              "Self-managed workspace setup",
-            ],
-          },
-          {
-            name: "Pro",
-            price: "500,000",
-            tag: "A LITTLE HELP GETTING STARTED",
-            text: "The same core tools, with scheduled setup and onboarding support.",
-            features: [
-              "Everything in Starter",
-              "Setup and onboarding by appointment",
-              "Agree your setup scope before purchase",
-              "For teams that prefer a guided start",
-            ],
-          },
-        ].map((p) => (
-          <article className="m-price" key={p.name}>
-            <small>{p.tag}</small>
-            <h3>{p.name}</h3>
-            <p>{p.text}</p>
-            <div className="m-price-value">
-              <span>IDR</span>
-              <strong>{p.price}</strong>
-            </div>
-            <span className="m-price-unit">
-              per workspace / 30-day paid term
-            </span>
-            <a
-              className={"m-button " + (p.name === "Pro" ? "secondary" : "")}
-              href="/products"
-            >
-              Choose your product <ArrowUpRight size={16} />
-            </a>
-            <ul>
-              {p.features.map((f) => (
-                <li key={f}>
-                  <Check size={15} />
-                  {f}
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
-      </div>
-      <div className="m-price-note">
-        <ShieldCheck size={22} />
-        <p>
-          <b>A 14-day initial trial. No automatic charges.</b> Each location has
-          its own subscription; headquarters has no extra platform charge.
-          Member dues and training purchases go to your business. Courvix adds
-          no per-dues or per-session fee. Subscriptions use manually verified
-          bank transfers; contact support if receiving instructions are not yet
-          available.
-        </p>
-      </div>
-    </>
-  );
-}
 function Workflow({ training = false }: { training?: boolean }) {
   const steps = training
     ? [
@@ -606,6 +542,7 @@ export default function Marketing({ page = "home" }: { page?: string }) {
         faq={<Faq />}
       />
     );
+  if (page === "pricing") return <PricingExperience header={<PublicHeader active="pricing"/>} footer={<PublicFooter/>}/>;
   const title: Record<string, string> = {
     products: "Two ways to work. One less thing to juggle.",
     platform: "A clear next step. For everyone involved.",
@@ -971,11 +908,7 @@ export default function Marketing({ page = "home" }: { page?: string }) {
         {(home || page === "platform") && <ExperienceShowcase />}
         {(home || page === "sports" || detail) && <SportsStory />}
         {page === "club-life" && <SocialTeaser />}
-        {page === "pricing" && (
-          <section className="m-section">
-            <Pricing />
-          </section>
-        )}
+
         {home && (
           <section className="m-section m-pricing-teaser">
             <div>

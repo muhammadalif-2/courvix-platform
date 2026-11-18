@@ -21,7 +21,6 @@ import {
   Users,
   LogOut,
 } from "lucide-react";
-import "./access.css";
 export async function accessAction(
   body: Record<string, unknown>,
   request: AppRequest = fetch,

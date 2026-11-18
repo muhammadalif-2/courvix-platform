@@ -26,7 +26,6 @@ import AccountProfile, { Avatar } from "../account-profile";
 import { Metric } from "../organization-hub";
 import { usePreferences } from "../preferences";
 import { money } from "@/lib/courvix";
-import "../access.css";
 export default function Operator({ demo = false }: { demo?: boolean } = {}) {
   const request = useAppRequest(),
     { t, locale } = usePreferences(),

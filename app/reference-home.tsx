@@ -20,6 +20,7 @@ import { BrandLogo } from "@/components/brand";
 import { ProductExplorer, ProductOverviewPreview } from "./product-explorer";
 import { DemoVideo } from "./media-showcase";
 import "./reference-home.css";
+import {ConnectedOperations,ConfidenceLinks} from "./market-growth";
 
 type Product = "club" | "training";
 const demo = (product: Product, role = "Owner", module = "ControlRoom") =>
@@ -69,7 +70,7 @@ const journeys = {
     },
     {
       title: "Bring your people together.",
-      text: "Invite staff and members with the email they use for ChatGPT. Their profile and role connect them to the right records.",
+      text: "Invite staff and members with their verified account email, or review requests from a role link. Their profile and permissions connect them to the right records.",
       label: "02 / INVITE",
       action: "Explore member management",
       href: demo("club", "Owner", "Members"),
@@ -454,6 +455,7 @@ export default function ReferenceHome({
           </div>
         </section>
 
+        <ConnectedOperations product={product} onChange={change}/>
         <section
           className="r-device-section r-section"
           aria-label="Connected product views"
@@ -774,6 +776,7 @@ export default function ReferenceHome({
           </div>
         </section>
 
+        <div className="r-container r-section"><ConfidenceLinks/></div>
         <div className="r-faq-wrap r-container">{faq}</div>
         <section className="r-closing r-container">
           <img

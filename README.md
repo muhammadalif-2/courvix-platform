@@ -1,10 +1,12 @@
 # courvix-platform
 
-**Courvix Platform — V1.0 rc.10**
+**Courvix Platform — V1.0 rc.11**
 
 Club and private trainer operations for Owner, Admin, Coach and Member. React/Vinext, Cloudflare D1/R2 and Better Auth accounts, with optional configured social providers. The landing page opens a separate interactive demo at `/demo` with five roles, an invitation inbox, simulated time, and payment reminders. Real accounts continue to use `/login`.
 
-Current implementation: [rc.10 accounts, waiting room and feature access](docs/ACCOUNT-ONBOARDING.md). Previous design: [rc.9 landing](docs/V1-REVIEW-RC9.md).
+Latest public-page, pricing, notification and legal review: [rc.11](docs/REVIEW-RC11.md).
+
+Current account implementation: [rc.10 accounts, waiting room and feature access](docs/ACCOUNT-ONBOARDING.md). Previous design: [rc.9 landing](docs/V1-REVIEW-RC9.md).
 
 Current scope: [Personal Training and the two-product model](docs/PERSONAL-TRAINING.md). English is the only interface language. Club Management remains a separate product with its existing workflow.
 

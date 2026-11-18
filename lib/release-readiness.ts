@@ -1,4 +1,4 @@
-export const RELEASE_VERSION = "1.0.0-rc.10";
+export const RELEASE_VERSION = "1.0.0-rc.11";
 export const RELEASE_CHECKS = [
   {
     id: "identity",

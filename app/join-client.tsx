@@ -3,7 +3,6 @@ import {useEffect,useState} from "react";
 import {ArrowRight,ShieldCheck,Check} from "lucide-react";
 import {BrandLogo} from "@/components/brand";
 import {accessAction} from "./access-client";
-import "./onboarding.css";
 export default function JoinClient(){
  const [invite,setInvite]=useState<any>(null),[viewer,setViewer]=useState<any>(null),[error,setError]=useState(""),[busy,setBusy]=useState(false),[done,setDone]=useState(false),[path,setPath]=useState("/join"),[code,setCode]=useState(""),[shared,setShared]=useState(false);
  useEffect(()=>{const p=new URLSearchParams(location.search);setPath(location.pathname+location.search);const isShared=p.has("link");setShared(isShared);setCode(p.get(isShared?"link":"code")||"");if(!p.get("link")&&!p.get("code")){setError("Open the full invitation link shared by your club or trainer. You can also check your waiting room for email invitations.");return}Promise.all([fetch("/api/invitation-preview?"+p).then(async r=>{const d:any=await r.json();if(!r.ok)throw Error(d.error);setInvite(d)}),fetch("/api/access").then(r=>r.json()).then((d:any)=>setViewer(d.viewer))]).catch(e=>setError(e.message));},[]);

@@ -40,7 +40,6 @@ import { ExportLink } from "./export-link";
 import { useModalKeyboard } from "./modal-keyboard";
 import { money } from "@/lib/courvix";
 import { TrainingControlRoom } from "./control-room";
-import "./access.css";
 import "./personal-training.css";
 const statusClass = (s: string) =>
   ["Paid", "Completed", "Active"].includes(s)

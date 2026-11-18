@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./dashboard-theme.css";
+import "./market-growth.css";
+import "./onboarding.css";
+import "./access.css";
 import { PreferencesProvider } from "./preferences";
 
 export const metadata: Metadata = {

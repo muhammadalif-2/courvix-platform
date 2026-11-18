@@ -1,6 +1,6 @@
 {
   "name": "courvix-platform",
-  "version": "1.0.0-rc.10",
+  "version": "1.0.0-rc.11",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
@@ -20,7 +20,8 @@
     "test:network": "node tests/network-api.mjs",
     "test:training": "node tests/personal-training-api.mjs",
     "test:jobs": "node tests/scheduler-api.mjs",
-    "test:onboarding": "node tests/account-onboarding-api.mjs"
+    "test:onboarding": "node tests/account-onboarding-api.mjs",
+    "test:public": "node tests/public-pages-smoke.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

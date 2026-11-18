@@ -2252,11 +2252,13 @@ export default function Courvix({
                 </span>
                 <button
                   className="icon-btn notification"
-                  aria-label="Notifications"
+                  aria-label="Workspace update summary"
+                  aria-expanded={notice}
+                  aria-controls="workspace-update-summary"
                   onClick={() => setNotice(!notice)}
                 >
                   <Bell size={19} />
-                  <i />
+                  {(outstanding.length > 0 || sessions.some(s => s.date >= today && s.status !== "Cancelled")) && <i aria-hidden="true"/>}
                 </button>
                 <PreferenceControls />
                 <button
@@ -2273,9 +2275,9 @@ export default function Courvix({
               </div>
             </header>
             {notice && (
-              <div className="notification-panel">
+              <div className="notification-panel" id="workspace-update-summary" role="region" aria-label="In-app update summary">
                 <h3>
-                  <T>{"Notifications"}</T>
+                  <T>{"In-app updates"}</T>
                 </h3>
                 <p>
                   {outstanding.length}
@@ -2289,6 +2291,7 @@ export default function Courvix({
                   }{" "}
                   <T>{"upcoming sessions available."}</T>
                 </p>
+                <p className="hint">Summary of loaded workspace records. Browser/phone push is not enabled in V1.</p>
                 <button
                   className="text-btn"
                   onClick={() => {
