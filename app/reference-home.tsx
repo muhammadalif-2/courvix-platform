@@ -8,20 +8,18 @@ import {
   Dumbbell,
   CalendarDays,
   Wallet,
-  ShieldCheck,
   Check,
   Layers,
-  Pause,
   CheckCircle2,
-  Clock3,
   MapPin,
 } from "lucide-react";
 import { BrandLogo } from "@/components/brand";
-import { ProductExplorer, ProductOverviewPreview } from "./product-explorer";
+import { ProductExplorer } from "./product-explorer";
 import { DemoVideo } from "./media-showcase";
 import "./reference-home.css";
 import {ConnectedOperations,ConfidenceLinks} from "./market-growth";
 import {RoleDayGuide} from "./interactive-guides";
+import { HeroSignal, ProductLens, HomeWorkbench, HomeJourneyScene, HomePlanPicker, HomeTrustLens } from "./home-stories";
 
 type Product = "club" | "training";
 const demo = (product: Product, role = "Owner", module = "ControlRoom") =>
@@ -193,8 +191,7 @@ export default function ReferenceHome({
 }) {
   const [scene, setScene] = useState(0),
     [product, setProduct] = useState<Product>("club"),
-    [step, setStep] = useState(0),
-    [paused, setPaused] = useState(false);
+    [step, setStep] = useState(0);
   const steps = useRef<HTMLDivElement>(null);
   const hero = scenes[scene],
     journey = journeys[product][step];
@@ -226,7 +223,7 @@ export default function ReferenceHome({
   return (
     <div
       className={
-        "mkt cv-public reference-site" + (paused ? " r-motion-paused" : "")
+        "mkt cv-public reference-site"
       }
     >
       <a className="m-skip" href="#main-content">
@@ -289,6 +286,7 @@ export default function ReferenceHome({
               </button>
             ))}
           </div>
+          <HeroSignal product={hero.product}/>
           <div className="r-hero-bottom">
             <span>YOUR SPORT. YOUR PEOPLE. YOUR COURVIX.</span>
             <a href="#product-film">
@@ -436,129 +434,11 @@ export default function ReferenceHome({
               </button>
             </article>
           </div>
-          <div className="r-fact-strip">
-            <div>
-              <strong>2</strong>
-              <span>Focused products</span>
-            </div>
-            <div>
-              <strong>14 days</strong>
-              <span>Initial workspace trial</span>
-            </div>
-            <div>
-              <strong>1 / 4 / 8 / 16</strong>
-              <span>PT visit & session-pack options</span>
-            </div>
-            <div>
-              <strong>Your people</strong>
-              <span>Role-based access</span>
-            </div>
-          </div>
+          <ProductLens product={product} onChange={change}/>
         </section>
 
         <ConnectedOperations product={product} onChange={change}/>
-        <section
-          className="r-device-section r-section"
-          aria-label="Connected product views"
-        >
-          <div className="r-device-inner r-container">
-            <div className="r-device-copy">
-              <span className="r-kicker">
-                <i>02</i>A VIEW THAT PUTS YOU IN CONTROL
-              </span>
-              <h2>
-                The whole picture.
-                <br />
-                <em>The next action.</em>
-              </h2>
-              <p>
-                See the records that belong together. Open a person, understand
-                the context, and keep moving.
-              </p>
-              <ProductSwitch
-                product={product}
-                change={change}
-                label="Choose the workspace preview"
-              />
-              <a className="r-text-link" href={demo(product)}>
-                Try the control room <ArrowUpRight size={18} />
-              </a>
-              <small>
-                Illustrative product views. Explore the working app in the demo.
-              </small>
-            </div>
-            <div className="r-device-stage">
-              <div className="r-orbit r-orbit-one" />
-              <div className="r-orbit r-orbit-two" />
-              <div className="r-desktop">
-                <div className="r-device-top">
-                  <span />
-                  <span />
-                  <span />
-                  <b>
-                    COURVIX /{" "}
-                    {product === "club"
-                      ? "CLUB MANAGEMENT"
-                      : "PERSONAL TRAINING"}
-                  </b>
-                </div>
-                <ProductOverviewPreview
-                  product={product}
-                  onInspect={() => jump(product)}
-                />
-              </div>
-              <div className="r-desktop-foot" />
-              <a
-                className="r-phone"
-                href={demo(product, "Member", "Dashboard")}
-                aria-label={
-                  product === "club"
-                    ? "Explore the member view"
-                    : "Explore the training client view"
-                }
-              >
-                <div className="r-phone-camera" />
-                <div className="r-phone-logo">
-                  <BrandLogo compact />
-                  <span>MY {product === "club" ? "CLUB" : "TRAINING"}</span>
-                </div>
-                <span className="r-phone-avatar">JL</span>
-                <h3>Hi, Jamie.</h3>
-                <p>Your next session, clear.</p>
-                <div className="r-phone-session">
-                  <CalendarDays size={19} />
-                  <span>NEXT SESSION</span>
-                  <b>
-                    {product === "club" ? "Team practice" : "Strength training"}
-                  </b>
-                  <small>
-                    Tuesday · 16:00
-                    <br />
-                    Coach Alex · Studio A
-                  </small>
-                </div>
-                <div className="r-phone-status">
-                  <CheckCircle2 size={15} />
-                  {product === "club"
-                    ? "Your own activity & records"
-                    : "5 available · 1 reserved"}
-                </div>
-                <span className="r-phone-link">
-                  Explore this role <ArrowUpRight size={13} />
-                </span>
-                <small className="r-sample">SAMPLE MEMBER VIEW</small>
-              </a>
-              <button
-                className="r-motion-button"
-                aria-pressed={paused}
-                onClick={() => setPaused(!paused)}
-              >
-                {paused ? <Play size={12} /> : <Pause size={12} />}
-                {paused ? "Resume ambient motion" : "Pause ambient motion"}
-              </button>
-            </div>
-          </div>
-        </section>
+        <HomeWorkbench product={product} onChange={change}/>
 
         <div className="r-explorer-wrap r-container">
           <ProductExplorer
@@ -631,18 +511,7 @@ export default function ReferenceHome({
               <span className="r-eyebrow">{journey.label}</span>
               <h3>{journey.title}</h3>
               <p>{journey.text}</p>
-              <div className="r-journey-record">
-                <span>
-                  <journey.icon size={23} />
-                  {product === "club" ? "CLUB MANAGEMENT" : "PERSONAL TRAINING"}
-                </span>
-                {journey.rows.map(([a, b]) => (
-                  <div key={a}>
-                    <span>{a}</span>
-                    <b>{b}</b>
-                  </div>
-                ))}
-              </div>
+              <HomeJourneyScene key={product+step} product={product} step={step}/>
               <a className="r-text-link" href={journey.href}>
                 {journey.action}
                 <ArrowUpRight size={16} />
@@ -668,46 +537,7 @@ export default function ReferenceHome({
             }
             text="Give staff a clear plan and members a view of their own journey. Access follows the role and workspace they've been invited to."
           />
-          <div className="r-role-grid">
-            {[
-              {
-                n: "01",
-                title: "Owner & administrator",
-                text: "Connected operations, people and payment reviews. A wider view when you manage more than one location.",
-                role: "Owner",
-                icon: Layers,
-              },
-              {
-                n: "02",
-                title: "Coach & trainer",
-                text: "Assigned people, upcoming sessions and recorded outcomes. The context needed to keep coaching moving.",
-                role: "Coach",
-                icon: Dumbbell,
-              },
-              {
-                n: "03",
-                title: "Member & client",
-                text: "Their own sessions, payment status and personal progress. A clear starting point before the next visit.",
-                role: "Member",
-                icon: Users,
-              },
-            ].map((r) => (
-              <article key={r.n}>
-                <div>
-                  <r.icon size={25} />
-                  <span>{r.n}</span>
-                </div>
-                <h3>{r.title}</h3>
-                <p>{r.text}</p>
-                <a
-                  aria-label={`Explore ${r.title} demo`}
-                  href={demo(product, r.role, "Dashboard")}
-                >
-                  Explore this role <ArrowUpRight size={16} />
-                </a>
-              </article>
-            ))}
-          </div>
+          <RoleDayGuide product={product}/>
         </section>
 
         <section className="r-pricing r-container r-section">
@@ -718,14 +548,7 @@ export default function ReferenceHome({
               <br />
               to get started.
             </h2>
-            <div className="r-price">
-              <span>IDR</span>
-              <strong>250,000</strong>
-              <span>
-                / workspace
-                <br />/ 30-day paid term
-              </span>
-            </div>
+            <HomePlanPicker/>
             <div className="r-price-tags">
               <span>
                 <Check size={13} />
@@ -777,7 +600,7 @@ export default function ReferenceHome({
           </div>
         </section>
 
-        <div className="r-container r-section"><RoleDayGuide/></div>
+        <div className="r-container r-section"><HomeTrustLens/></div>
         <div className="r-container r-section"><ConfidenceLinks/></div>
         <div className="r-faq-wrap r-container">{faq}</div>
         <section className="r-closing r-container">

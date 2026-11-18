@@ -10,10 +10,12 @@ import { BrandLogo } from "@/components/brand";
 import { SportSelect } from "@/components/catalog-fields";
 import { sportOptions, validAmount, currencyDigits } from "@/lib/sports";
 import PersonalTraining from "./personal-training";
+import { FeatureGuide } from "./feature-guide";
+import { ClubSetupGuide } from "./club-setup-guide";
+import { createLabels } from "@/lib/workspace-guidance";
 import { ClubControlRoom } from "./control-room";
 import { PersonProfile } from "./person-profile";
 import {
-  ModuleIntro,
   OperationDetails,
   TransactionDetails,
 } from "./club-operations";
@@ -49,6 +51,7 @@ import {
   GraduationCap,
   ChevronLeft,
   CreditCard,
+  BookOpen,
 } from "lucide-react";
 import {
   SidebarProvider,
@@ -92,6 +95,7 @@ import { ClubAccess, accessAction } from "./access-client";
 import type { Identity } from "@/lib/access-policy";
 import { TeamsView, CalendarView, MemberDetails } from "./operations";
 const icons: any = {
+  GettingStarted: BookOpen,
   Profile: Users,
   Network: Globe,
   Dashboard: LayoutDashboard,
@@ -120,6 +124,7 @@ const icons: any = {
 };
 const roleNav: Record<string, string[]> = {
   Admin: [
+    "GettingStarted",
     "Profile",
     "Dashboard",
     "ControlRoom",
@@ -180,11 +185,12 @@ const roleNav: Record<string, string[]> = {
   ],
 };
 const labels: Record<string, string> = {
+  GettingStarted: "Getting started",
   Dashboard: "Overview",
   ControlRoom: "Club control room",
-  Members: "Member",
-  Teams: "Kelompok",
-  Coaches: "Coach",
+  Members: "Members",
+  Teams: "Groups",
+  Coaches: "Coaches",
   Attendance: "Attendance",
   Schedule: "Schedule",
   Training: "Training programs",
@@ -196,7 +202,7 @@ const labels: Record<string, string> = {
   Announcements: "Announcements",
   Documents: "Club guide",
   Reports: "Reports",
-  Settings: "Settings",
+  Settings: "Settings & access",
   Support: "Support",
   Reminders: "Reminders",
   Profile: "My profile",
@@ -881,13 +887,13 @@ export default function Courvix({
           {(page === "Support" ||
             admin ||
             (["Training", "Support"].includes(page) && role === "Coach")) &&
-            !["Payments", "Audit logs"].includes(page) && (
+            !["Payments", "Audit logs"].includes(page) && !readOnly && canFeature(identity!,page,true) && (
               <button
                 className="btn primary"
                 onClick={() => open({ type: "create", module: page })}
               >
                 <Plus size={16} />
-                <T>{"Add"}</T>
+                {createLabels[page] || "Add record"}
               </button>
             )}
         </div>
@@ -973,7 +979,7 @@ export default function Courvix({
                         })
                       }
                     >
-                      <T>{"Detail "}</T>
+                      <span>View details</span>
                       <ChevronRight size={14} />
                     </button>
                   </TableCell>
@@ -988,7 +994,7 @@ export default function Courvix({
                 <T>{"No matching records"}</T>
               </h3>
               <p>
-                <T>{"Change your filter or add the first record."}</T>
+                {query || filter!=="All" ? "Try another search or clear the status filter." : "Use the guide above to understand this feature before creating the first record."}
               </p>
             </div>
           )}
@@ -1734,72 +1740,7 @@ export default function Courvix({
     );
   }
   function Onboarding() {
-    const steps = [
-      [
-        "Membership",
-        "Set up a membership plan",
-        "Set the price and period.",
-        db.records.Membership.length > 0,
-      ],
-      [
-        "Teams",
-        "Create " + (org.groupLabel || "kelompok").toLowerCase(),
-        "Add groups and coaches.",
-        db.records.Teams.length > 0 && db.records.Coaches.length > 0,
-      ],
-      [
-        "Members",
-        "Add members",
-        "Record members or send invitations.",
-        db.records.Members.length > 0,
-      ],
-      [
-        "Schedule",
-        "Schedule training",
-        "Start a session and record attendance.",
-        db.records.Schedule.length > 0,
-      ],
-    ] as const;
-    if (steps.every((x) => x[3])) return null;
-    return (
-      <section className="v1-onboarding">
-        <span className="eyebrow">
-          <T>{"LANGKAH PERTAMA"}</T>
-        </span>
-        <h2>
-          <T>{"Siapkan "}</T>
-          {org.name}
-          <T>{"for your first training session."}</T>
-        </h2>
-        <p>
-          <T>
-            {
-              "Your new workspace starts empty. Complete setup, then invite your team through Settings."
-            }
-          </T>
-        </p>
-        <div className="v1-onboarding-steps">
-          {steps.map(([module, title, description, done], i) => (
-            <button
-              key={module}
-              className={done ? "completed" : ""}
-              onClick={() => go(module)}
-            >
-              <b>{done ? "✓ COMPLETE" : "0" + (i + 1)}</b>
-              <strong>{t(title)}</strong>
-              <small>{t(description)}</small>
-            </button>
-          ))}
-        </div>
-        <button
-          className="text-btn"
-          style={{ marginTop: 16 }}
-          onClick={() => go("Settings")}
-        >
-          <T>{"Set bank details & invite users →"}</T>
-        </button>
-      </section>
-    );
+    return identity && role === "Admin" ? <ClubSetupGuide compact data={db} identity={identity} onNavigate={go}/> : null;
   }
   function Website() {
     const site = db.websites[club];
@@ -2149,39 +2090,22 @@ export default function Courvix({
                 <T>{"WORKSPACE"}</T>
               </span>
               <SidebarMenu>
-                {roleNav[role].filter(item=>!identity||canFeature(identity,item)).map((item, i) => {
-                  const Icon = icons[item];
-                  return (
-                    <SidebarMenuItem key={item}>
-                      {[8, 15].includes(i) && (
-                        <span className="nav-label">
-                          {i === 8 ? "BUSINESS" : "CLUB SETTINGS"}
-                        </span>
-                      )}
-                      <SidebarMenuButton
-                        onClick={() => go(item)}
-                        isActive={page === item}
-                        className="nav-item"
-                      >
-                        <Icon size={18} />
-                        <span>
-                          {item === "Teams"
-                            ? t(
-                                org.groupLabel ||
-                                  (org.workspace_type === "Trainer"
-                                    ? "Kelas"
-                                    : "Kelompok"),
-                              )
-                            : t(labels[item] || item)}
-                        </span>
-                        {item === "Invoices" && (
-                          <span className="nav-count">
-                            {outstanding.length}
-                          </span>
-                        )}
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  );
+                {[
+                  ["START HERE", ["GettingStarted", "Dashboard", "ControlRoom"]],
+                  ["PEOPLE", ["Members", "Teams", "Coaches"]],
+                  ["TRAINING", ["Schedule", "Attendance", "Training", "Competitions"]],
+                  ["CLUB FINANCE", ["Membership", "Invoices", "Reminders", "Payments", "Finance", "Reports"]],
+                  ["WORKSPACE", ["Announcements", "Documents", "Settings", "Audit logs", "Support", "Profile", "Clubs", "Projects"]],
+                ].flatMap(([heading, modules]) => {
+                  const items = (modules as string[]).filter(item => roleNav[role].includes(item) && canFeature(identity,item));
+                  if (!items.length) return [];
+                  return [
+                    <SidebarMenuItem key={String(heading)}><span className="nav-label">{heading}</span></SidebarMenuItem>,
+                    ...items.map(item => {
+                      const Icon = icons[item];
+                      return <SidebarMenuItem key={item}><SidebarMenuButton closeOnSelect onClick={() => go(item)} isActive={page === item} className="nav-item"><Icon size={18}/><span>{item === "Teams" ? t(org.groupLabel || "Groups") : t(labels[item] || item)}</span>{item === "Invoices" ? <span className="nav-count">{outstanding.length}</span> : null}</SidebarMenuButton></SidebarMenuItem>;
+                    }),
+                  ];
                 })}
               </SidebarMenu>
             </SidebarContent>
@@ -2322,7 +2246,7 @@ export default function Courvix({
                           <span className="orange">.</span>
                         </h1>
                         <p>
-                          <T>{"Manage your workspace in one place."}</T>
+                          {page === "GettingStarted" ? "A practical setup path for your club owner and administrators." : "Review the records below, open details, and make only the changes your role permits."}
                         </p>
                       </div>
                       <span className="tag">{periodLabel}</span>
@@ -2378,8 +2302,10 @@ export default function Courvix({
                       </ExportLink>
                     </div>
                   )}
-                  <ModuleIntro page={page} />
-                  {page === "Network" && identity.isOwner ? (
+                  <FeatureGuide key={page} page={page} readOnly={readOnly} canEdit={!readOnly && canFeature(identity,page,true)}/>
+                  {page === "GettingStarted" && role === "Admin" ? (
+                    <ClubSetupGuide key={club} data={db} identity={identity} onNavigate={go}/>
+                  ) : page === "Network" && identity.isOwner ? (
                     <OrganizationHub
                       onSwitch={switchWorkspace}
                       demo={demo}

@@ -161,6 +161,7 @@ export function PublicFooter() {
           <a href="/compare">Compare the workflow</a>
           <a href="/trust">Data & trust</a>
           <a href="/help">Help center</a>
+          <a href="/getting-started">Club setup tutorial</a>
           <a href="/custom">Custom projects</a>
         </div>
         <div>

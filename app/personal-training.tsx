@@ -40,6 +40,7 @@ import { ExportLink } from "./export-link";
 import { useModalKeyboard } from "./modal-keyboard";
 import { money } from "@/lib/courvix";
 import { TrainingControlRoom } from "./control-room";
+import { FeatureGuide } from "./feature-guide";
 import "./personal-training.css";
 const statusClass = (s: string) =>
   ["Paid", "Completed", "Active"].includes(s)
@@ -651,6 +652,7 @@ export default function PersonalTraining({
             </div>
           </div>
         )}
+        <FeatureGuide key={page} page={page} training readOnly={d.readOnly} canEdit={canWrite}/>
         {page === "control" && !isClient ? (
           <TrainingControlRoom
             view={d}

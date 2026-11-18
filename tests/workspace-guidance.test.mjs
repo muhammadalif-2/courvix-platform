@@ -1,0 +1,22 @@
+import assert from "node:assert/strict";
+import { clubSetupProgress, clubSetupSteps, clubFeatureHelp, trainingFeatureHelp, platformFeatureHelp } from "../lib/workspace-guidance.ts";
+import { emptyWorkspace } from "../lib/courvix.ts";
+const data=emptyWorkspace(),owner={id:"u",name:"Owner",email:"owner@example.test",role:"Admin",isOwner:true,club:"one"};
+for(const m of ["Membership","Coaches","Teams","Members","Schedule","Attendance"])data.records[m]=[{id:"other-"+m,club:"two"}];
+const initial=clubSetupProgress(data,owner);
+assert.equal(initial.filter(s=>s.done).length,0,"Another club must not complete this club's milestones");
+assert.equal(initial.filter(s=>s.observable).length,6);
+for(const id of ["subscription","receiving","invitations","routine"])assert.equal(initial.find(s=>s.id===id).status,"Review required");
+data.records.Membership.push({id:"plan",club:"one"});data.records.Coaches.push({id:"coach",club:"one"});data.records.Teams.push({id:"group",club:"one",coachId:"coach"});data.records.Members.push({id:"member",club:"one",team:"group",membership:"plan"});data.records.Schedule.push({id:"session",club:"one",team:"group"});data.records.Attendance.push({id:"attendance",club:"one"});
+assert.equal(clubSetupProgress(data,owner).filter(s=>s.done).length,6);
+data.records.Teams.find(r=>r.id==="group").coachId="missing";
+assert.equal(clubSetupProgress(data,owner).find(s=>s.id==="groups").done,false);
+const admin={...owner,isOwner:false,permissions:{Membership:"none",Coaches:"none"}};
+const restricted=clubSetupProgress(data,admin);
+assert.equal(restricted.find(s=>s.id==="receiving").status,"Owner task");
+assert.equal(restricted.find(s=>s.id==="coaches").status,"Access restricted");
+assert.equal(restricted.find(s=>s.id==="groups").observable,false,"Hidden dependencies must not infer setup completion");
+assert.equal(restricted.find(s=>s.id==="members").status,"Review required");
+assert.equal(clubSetupSteps.length,12);
+for(const map of [clubFeatureHelp,trainingFeatureHelp,platformFeatureHelp])for(const help of Object.values(map)){assert.equal(help.steps.length,3);assert.ok(help.purpose&&help.outcome)}
+console.log("PASS workspace guidance: same-club milestones, linked records, owner-only tasks, hidden dependencies and manual review boundaries.");

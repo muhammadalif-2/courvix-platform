@@ -8,6 +8,7 @@ import WorkspaceCommand, {
   type WorkspaceCommandItem,
 } from "./workspace-command";
 import { Avatar } from "./account-profile";
+import { FeatureGuide } from "./feature-guide";
 import { useModalKeyboard } from "./modal-keyboard";
 export function ManagementShell({
   children,
@@ -237,6 +238,7 @@ export function ManagementShell({
               COURVIX <b>1.0</b>
             </span>
           </div>
+          {platform ? <FeatureGuide key={active} page={active} platform canEdit={["billing","readiness","support","profile"].includes(active)}/> : null}
           {children}
         </div>
         <footer className="management-footer">

@@ -638,6 +638,7 @@ export function ClubAccess({ onUpdated }: { onUpdated?: () => void }) {
     a = d?.session;
   return (
     <div className="club-access v1-settings">
+      {d ? <nav className="wg-settings-nav" aria-label="Jump to settings section"><a href="#workspace-settings">Workspace</a>{a?.isOwner ? <a href="#receiving-details">Receiving bank</a> : null}<a href="#courvix-subscription">Courvix subscription</a><a href="#invite-people">Invite people</a><a href="#access-roles">Roles & access</a><a href="#invitation-history">Invitation history</a></nav> : null}
       {d?.session && (d.session.isOwner || d.session.permissions?.Access !== "none") && <AccessControl onUpdated={onUpdated}/>}
       {error && (
         <p className="error" role="alert">
@@ -656,7 +657,7 @@ export function ClubAccess({ onUpdated }: { onUpdated?: () => void }) {
       )}
       {d && (
         <>
-          <section className="panel padded">
+          <section id="workspace-settings" className="panel padded">
             <span className="eyebrow">
               <T>{"WORKSPACE"}</T>
             </span>
@@ -741,7 +742,7 @@ export function ClubAccess({ onUpdated }: { onUpdated?: () => void }) {
                     </small>
                   </label>
                 </div>
-                <h3>
+                <h3 id="receiving-details">
                   <T>{"Bank account for member dues"}</T>
                 </h3>
                 <p className="hint">
@@ -790,7 +791,7 @@ export function ClubAccess({ onUpdated }: { onUpdated?: () => void }) {
               </p>
             )}
           </section>
-          <section className="panel padded">
+          <section id="courvix-subscription" className="panel padded">
             <span className="eyebrow">
               <T>{"LANGGANAN COURVIX"}</T>
             </span>
@@ -928,7 +929,7 @@ export function ClubAccess({ onUpdated }: { onUpdated?: () => void }) {
               </p>
             )}
           </section>
-          <section className="panel padded">
+          <section id="invite-people" className="panel padded">
             <span className="eyebrow">
               <T>{"THE PEOPLE BEHIND THE PROGRESS"}</T>
             </span>
@@ -1126,7 +1127,7 @@ export function ClubAccess({ onUpdated }: { onUpdated?: () => void }) {
               </details>
             )}
           </section>
-          <section className="panel padded access-invites">
+          <section id="invitation-history" className="panel padded access-invites">
             <h2>
               <T>{"Invitations & delivery"}</T>
             </h2>

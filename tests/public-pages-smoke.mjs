@@ -1,10 +1,11 @@
 import assert from "node:assert/strict";
 const base=process.env.COURVIX_TEST_URL||"http://localhost:8788";
 const routes=[
- ["/",["ONE WORKDAY, DIFFERENT VIEWS","Less admin.","FROM SCATTERED TO CONNECTED","Data &amp; trust"]],
+ ["/",["Click a person.","See the whole story.","CHOOSE HOW YOU WORK","WORKFLOW EXAMPLE","ONE WORKDAY, DIFFERENT VIEWS","Less admin.","FROM SCATTERED TO CONNECTED","Data &amp; trust"]],
  ["/pricing",["PLAN YOUR WORKSPACES","250,000","500,000","30-day paid term","WHAT’S INCLUDED","Separate tools &amp; manual handoffs"]],
  ["/pricing/club",["Club Management","Member profiles &amp; groups","Scheduled onboarding support"]],
  ["/pricing/personal-training",["Personal Training","Per-visit &amp; session-pack offers","Session ledger &amp; progress"]],
+ ["/getting-started",["Your first club.","Confirm your workspace access","Owner responsibility","Explore this step in the demo"]],
  ["/products",["FIND YOUR FIT"]],
  ["/platform",["FOLLOW AN INVITATION"]],
  ["/clubs",["TRY A TRAINING DAY"]],
@@ -31,4 +32,4 @@ for(const [path,expected] of routes){
 }
 for(const asset of allAssets){const r=await fetch(base+asset,{signal:AbortSignal.timeout(15000)});assert.equal(r.status,200,"Missing published asset "+asset);await r.arrayBuffer()}
 assert.equal((await fetch(base+"/pricing/unknown",{signal:AbortSignal.timeout(15000)})).status,404);
-console.log("PASS public smoke: rendered 21 public/account routes and topic-specific guides, original account routes, invalid product 404, and "+allAssets.size+" referenced assets. Browser interactions remain a separate acceptance check.");
+console.log("PASS public smoke: rendered 22 public/account routes and topic-specific guides, original account routes, invalid product 404, and "+allAssets.size+" referenced assets. Browser interactions remain a separate acceptance check.");
