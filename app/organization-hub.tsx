@@ -225,7 +225,7 @@ export default function OrganizationHub({
           </span>
         </div>
       </div>
-      <div className="management-stats">
+      <div className="di-metric-frame"><div className="management-stats">
         <Metric
           icon={Building2}
           label={t("Branch count")}
@@ -242,7 +242,7 @@ export default function OrganizationHub({
           value={totals.coaches}
         />
         <Metric icon={Activity} label={t("Sessions")} value={totals.sessions} />
-      </div>
+      </div></div>
       <div className="management-tabs">
         <button
           className={tab === "overview" ? "active" : ""}

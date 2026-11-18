@@ -40,6 +40,7 @@ import { ExportLink } from "./export-link";
 import { useModalKeyboard } from "./modal-keyboard";
 import { money } from "@/lib/courvix";
 import { TrainingControlRoom } from "./control-room";
+import {TrainingDashboardInsights} from "./dashboard-insights";
 import { FeatureGuide } from "./feature-guide";
 import "./personal-training.css";
 const statusClass = (s: string) =>
@@ -747,7 +748,7 @@ export default function PersonalTraining({
                 </button>
               </div>
             )}
-            <div className="management-stats">
+            <div className="di-metric-frame"><div className="management-stats">
               <Metric
                 icon={isClient ? Ticket : Users}
                 label={isClient ? "Available sessions" : "Active clients"}
@@ -791,7 +792,8 @@ export default function PersonalTraining({
                     : completed.length
                 }
               />
-            </div>
+            </div></div>
+            <TrainingDashboardInsights view={d} onNavigate={navigate}/>
             <div className="pt-journey">
               {[
                 "Register & profile",

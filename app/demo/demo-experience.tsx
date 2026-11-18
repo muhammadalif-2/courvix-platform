@@ -295,7 +295,7 @@ export default function DemoExperience() {
                 </button>
               ))}
             </div>
-            <button className="demo-reset" onClick={() => setResetPrompt(true)}>
+            <button className="demo-reset" title="Reset browser-local demo edits and load the latest sample dataset" onClick={() => setResetPrompt(true)}>
               <RotateCcw size={12} />
               Reset demo
             </button>

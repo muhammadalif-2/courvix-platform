@@ -183,7 +183,7 @@ export function createDemoState(populated = true): DemoState {
     status: i < 6 ? "Pending" : "Paid",
     fee: 0,
     gateway: 0,
-    method: "Transfer bank",
+    method: "Bank transfer",
     ...(i >= 6
       ? {
           paymentDate: today + "T09:00:00Z",
@@ -206,7 +206,7 @@ export function createDemoState(populated = true): DemoState {
     fee: 0,
     gateway: 0,
     status: "Paid",
-    method: "Transfer bank",
+    method: "Bank transfer",
     reference: i.reference,
     date: today + "T09:00:00Z",
     verifiedBy: "admin@example.test",
@@ -238,15 +238,22 @@ export function createDemoState(populated = true): DemoState {
       status: "Scheduled",
     },
   ];
+  // Synthetic history only: seed enough linked activity to explore each role's charts.
+  for (let i=0;i<4;i++) {
+    const date=shiftDate(today,-(i+1)*2),team=i%2===0?"t-1":"t-2",id="history-session-"+i;
+    data.records.Schedule.push({id,club,name:["Technique foundations","Team coordination","Movement & control","Game preparation"][i],team,coachId:i%2===0?"coach-1":"coach-2",date,time:"16:00",endTime:"17:30",venue:"GOR Batam · Training court",status:"Completed"});
+    data.records.Attendance.push(...data.records.Members.filter(m=>m.team===team).map((m,j)=>({id:id+"-"+m.id,club,session:id,member:m.id,team,date,name:m.name,status:j===5?"Absent":j===4?"Late":"Present"})));
+  }
+  for(let i=0;i<3;i++)data.records.Schedule.push({id:"next-session-"+i,club,name:["Passing & movement","Finishing practice","Group development"][i],team:i%2===0?"t-1":"t-2",coachId:i%2===0?"coach-1":"coach-2",date:shiftDate(today,i+2),time:"16:00",endTime:"17:30",venue:"GOR Batam · Training court",status:"Scheduled"});
   data.records.Training = [
     {
       id: "training-1",
       club,
-      name: "Fondasi teknik",
+      name: "Technique foundations",
       session: "s-1",
       team: "t-1",
       coachId: "coach-1",
-      objective: "Kontrol bola",
+      objective: "Ball control",
       duration: 90,
       description: "Warm-up, drills and evaluation",
       status: "Active",
@@ -543,7 +550,7 @@ function seedDemoNetwork(s: DemoState) {
         date: s.today,
         due: shiftDate(s.today, 3),
         status: i % 2 === 0 ? "Paid" : "Pending",
-        method: "Transfer bank",
+        method: "Bank transfer",
         fee: 0,
         gateway: 0,
       };
@@ -558,7 +565,7 @@ function seedDemoNetwork(s: DemoState) {
           amount: invoice.amount,
           total: invoice.amount,
           status: "Paid",
-          method: "Transfer bank",
+          method: "Bank transfer",
           date: s.today,
           reference: "DEMO-TRF-" + i,
           fee: 0,
@@ -1626,7 +1633,7 @@ export function simulateRequest(
         verifiedAt: s.today,
         verifiedBy: a.email,
         paymentDate: s.today,
-        method: "Transfer bank",
+        method: "Bank transfer",
       });
       if (b.action === "approve") {
         s.data.records.Payments.unshift({
@@ -1640,7 +1647,7 @@ export function simulateRequest(
           fee: 0,
           gateway: 0,
           status: "Paid",
-          method: "Transfer bank",
+          method: "Bank transfer",
           reference: i.reference,
           date: s.today,
           verifiedBy: a.email,

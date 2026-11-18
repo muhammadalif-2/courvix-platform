@@ -2,19 +2,19 @@ import assert from "node:assert/strict";
 const base=process.env.COURVIX_TEST_URL||"http://localhost:8788";
 const routes=[
  ["/",["Click a person.","See the whole story.","CHOOSE HOW YOU WORK","WORKFLOW EXAMPLE","ONE WORKDAY, DIFFERENT VIEWS","Less admin.","FROM SCATTERED TO CONNECTED","Data &amp; trust"]],
- ["/pricing",["PLAN YOUR WORKSPACES","250,000","500,000","30-day paid term","WHAT’S INCLUDED","Separate tools &amp; manual handoffs"]],
+ ["/pricing",["The setup experience is the difference.","Plan my Pro onboarding","Your setup experience","PLAN YOUR WORKSPACES","250,000","500,000","30-day paid term","WHAT’S INCLUDED","Separate tools &amp; manual handoffs"]],
  ["/pricing/club",["Club Management","Member profiles &amp; groups","Scheduled onboarding support"]],
  ["/pricing/personal-training",["Personal Training","Per-visit &amp; session-pack offers","Session ledger &amp; progress"]],
  ["/getting-started",["Your first club.","Confirm your workspace access","Owner responsibility","Explore this step in the demo"]],
  ["/products",["FIND YOUR FIT"]],
- ["/platform",["FOLLOW AN INVITATION"]],
- ["/clubs",["TRY A TRAINING DAY"]],
+ ["/platform",["FOLLOW AN INVITATION","MEMBERSHIP &amp; GROUP TRAINING","PURCHASES &amp; SESSION CREDITS","Client portal example stages"]],
+ ["/clubs",["TRY A TRAINING DAY","All supported sport categories","Basketball","Esports","Skiing","Animated sample","Build the roster"]],
  ["/personal-training",["EXPLORE SESSION CREDITS"]],
  ["/sports",["EXPLORE YOUR SPORT"]],
  ["/contact",["PLAN YOUR FIRST CONVERSATION"]],
  ["/custom",["SHAPE YOUR PROJECT"]],
  ["/club-life",["A SMALL TRAINING-DAY HABIT"]],
- ["/compare",["Compare the workflow","Pause animation","No third-party prices or savings are assumed."]],
+ ["/compare",["Compare the workflow","THE CONNECTED CONTEXT","No third-party prices or savings are assumed."]],
  ["/help",["FIND THE NEXT STEP","THE COURVIX HELP CENTER","Browser/mobile push is not implemented","Can I sell visits"]],
  ["/trust",["EXPLORE THE ACCESS BOUNDARIES","Muhammad Alif","16112","Browser/phone push","Not implemented"]],
  ["/policies",["UNDERSTAND THE RESPONSIBILITY","Service terms","Privacy notice","Indonesian review companion"]],
@@ -26,7 +26,7 @@ const routes=[
 ];
 const allAssets=new Set();
 for(const [path,expected] of routes){
- const r=await fetch(base+path,{signal:AbortSignal.timeout(30000)}),html=await r.text();assert.equal(r.status,200,path+" "+html.slice(0,200));assert.ok(!html.includes("Internal Server Error"),path);for(const value of expected)assert.ok(html.includes(value),path+": missing "+value);
+ const r=await fetch(base+path,{signal:AbortSignal.timeout(30000)}),html=await r.text();assert.equal(r.status,200,path+" "+html.slice(0,200));assert.ok(!html.includes("Internal Server Error"),path);if(path==="/compare")assert.ok(!html.includes("Pause animation"),"Removed comparison pause label");for(const value of expected)assert.ok(html.includes(value),path+": missing "+value);
  for(const match of html.matchAll(/(?:href|src)="([^"#]+)"/g)){const target=match[1].replaceAll('&amp;','&');if(target.startsWith('/_next/')||target.endsWith('.webp')||target.endsWith('.woff'))allAssets.add(target)}
  console.log("PASS public route",path);
 }

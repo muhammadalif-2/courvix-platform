@@ -10,6 +10,7 @@ import { BrandLogo } from "@/components/brand";
 import { SportSelect } from "@/components/catalog-fields";
 import { sportOptions, validAmount, currencyDigits } from "@/lib/sports";
 import PersonalTraining from "./personal-training";
+import {ClubDashboardInsights} from "./dashboard-insights";
 import { FeatureGuide } from "./feature-guide";
 import { ClubSetupGuide } from "./club-setup-guide";
 import { createLabels } from "@/lib/workspace-guidance";
@@ -1137,6 +1138,7 @@ export default function Courvix({
     );
   }
   function Dashboard() {
+    const periodInvoices=invoices.filter(i=>(i.period||i.date||"").startsWith(period)), paidInPeriod=periodInvoices.filter(i=>i.status==="Paid");
     const metrics =
       role === "Coach"
         ? [
@@ -1144,21 +1146,21 @@ export default function Courvix({
             ["My groups", String(teams.length), "Training groups", Layers],
             [
               "Upcoming sessions",
-              String(sessions.length),
-              "Scheduled session",
+              String(sessions.filter(s=>s.date>=today&&!["Completed","Cancelled","No-show"].includes(s.status)).length),
+              "Upcoming recorded schedule",
               CalendarDays,
             ],
             [
               "Attendance notes",
               String(scope("Attendance").length),
-              "Kehadiran tercatat",
+              "Recorded attendance",
               ClipboardCheck,
             ],
           ]
         : role === "Member"
           ? [
               [
-                "Keanggotaan saya",
+                "My membership",
                 scope("Members")[0]?.status || "—",
                 org.name,
                 CreditCard,
@@ -1166,7 +1168,7 @@ export default function Courvix({
               [
                 "My invoices",
                 String(invoices.length),
-                "Iuran pribadi",
+                "Personal invoices",
                 FileText,
               ],
               [
@@ -1186,26 +1188,26 @@ export default function Courvix({
               [
                 "Total members",
                 members.length.toLocaleString("en-US"),
-                teams.length + " kelompok aktif",
+                teams.length + " visible groups",
                 Users,
               ],
               [
-                "Received this month",
+                "Received this period",
                 money(role === "Administrator" ? fees : gross),
-                "Transfer terverifikasi",
+                "Verified transfers",
                 Wallet,
               ],
               [
                 "Paid invoices",
-                Math.round((paid.length / Math.max(1, invoices.length)) * 100) +
+                Math.round((paidInPeriod.length / Math.max(1, periodInvoices.length)) * 100) +
                   "%",
-                paid.length + " verified invoices",
+                paidInPeriod.length + " paid invoices in period",
                 Activity,
               ],
               [
                 "Unpaid",
                 money(outstanding.reduce((s, r) => s + r.amount, 0)),
-                outstanding.length + " invoice(s) need follow-up",
+                outstanding.length + " outstanding invoice(s) · all periods",
                 FileText,
               ],
             ];
@@ -1214,7 +1216,7 @@ export default function Courvix({
         <div className="welcome">
           <div>
             <p className="eyebrow">
-              <T>{"KLUBMU DALAM SATU PANDANGAN"}</T>
+              <T>{"YOUR CLUB AT A GLANCE"}</T>
             </p>
             <h1>
               {role === "Administrator"
@@ -1244,7 +1246,7 @@ export default function Courvix({
           </label>
         </div>
         {admin && <Onboarding />}
-        <div className="metrics">
+        <div className="di-metric-frame"><div className="metrics">
           {metrics.map(([label, value, sub, Icon]: any, i) => (
             <div className="metric" key={label}>
               <div className="metric-label">
@@ -1260,7 +1262,8 @@ export default function Courvix({
               </small>
             </div>
           ))}
-        </div>
+        </div></div>
+        <ClubDashboardInsights data={db} identity={identity!} period={period} today={today} currency={org.currency||"IDR"} onNavigate={go}/>
         <div className="dashboard-grid">
           <div className="panel revenue">
             <div className="panel-title">
@@ -1311,7 +1314,7 @@ export default function Courvix({
           <div className="panel recent">
             <div className="panel-title">
               <div>
-                <h2>{admin ? "Transaksi terbaru" : "Club announcements"}</h2>
+                <h2>{admin ? "Recent transactions" : "Club announcements"}</h2>
                 <p>
                   {admin
                     ? "Verified transfer history and administrative corrections."
@@ -1390,7 +1393,7 @@ export default function Courvix({
           <div className="right-stack">
             <div className="quick-panel">
               <span className="eyebrow">
-                <T>{"LEBIH RAPI. LEBIH SIAP."}</T>
+                <T>{"A CLEARER NEXT ACTION"}</T>
               </span>
               <h2>
                 <T>{"Start with one small action."}</T>
@@ -1401,7 +1404,7 @@ export default function Courvix({
                       ["Add member", "Members", Users],
                       ["Create invoice", "Invoices", FileText],
                       ["Schedule training", "Schedule", CalendarDays],
-                      ["Catat absensi", "Attendance", ClipboardCheck],
+                      ["Record attendance", "Attendance", ClipboardCheck],
                     ]
                   : [
                       ["My schedule", "Schedule", CalendarDays],
@@ -1444,7 +1447,7 @@ export default function Courvix({
                   className="text-btn"
                   onClick={() => go(admin ? "Settings" : "Support")}
                 >
-                  {admin ? "Manage workspace users" : "Buka bantuan"}{" "}
+                  {admin ? "Manage workspace users" : "Open support"}{" "}
                   <ArrowRight size={15} />
                 </button>
               </div>
@@ -1668,7 +1671,7 @@ export default function Courvix({
             }}
           />
         </label>
-        <div className="metrics">
+        <div className="di-metric-frame"><div className="metrics">
           {[
             ["Dues collected", gross],
             ["Per-dues platform fee", 0],
@@ -1681,7 +1684,7 @@ export default function Courvix({
               <small>{periodLabel}</small>
             </div>
           ))}
-        </div>
+        </div></div>
         <div className="panel">
           <div className="panel-title">
             <h2>

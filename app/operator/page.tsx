@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { useAppRequest } from "../app-transport";
 import { ManagementShell } from "../management-shell";
+import {OperatorDashboardInsights} from "../dashboard-insights";
 import AccountProfile, { Avatar } from "../account-profile";
 import { Metric } from "../organization-hub";
 import { usePreferences } from "../preferences";
@@ -282,7 +283,7 @@ export default function Operator({ demo = false }: { demo?: boolean } = {}) {
                   <small>{t("Across all branches")}</small>
                 </div>
               </section>
-              <div className="management-stats">
+              <div className="di-metric-frame"><div className="management-stats">
                 <Metric
                   icon={Building2}
                   label={t("Total workspaces")}
@@ -307,7 +308,7 @@ export default function Operator({ demo = false }: { demo?: boolean } = {}) {
                   value={idr(sum.revenue)}
                   note={t("Verified payments")}
                 />
-              </div>
+              </div></div>
               {(sum.review > 0 || sum.expired > 0) && (
                 <div className="platform-attention">
                   <AlertCircle size={19} />
@@ -327,6 +328,7 @@ export default function Operator({ demo = false }: { demo?: boolean } = {}) {
                   </button>
                 </div>
               )}
+              <OperatorDashboardInsights view={d}/>
               <div className="management-two-col">
                 <section className="panel growth-panel">
                   <div className="hub-section-heading">
@@ -1098,14 +1100,14 @@ export default function Operator({ demo = false }: { demo?: boolean } = {}) {
                     >
                       {c.effectiveStatus}
                     </span>
-                    <div className="management-stats compact">
+                    <div className="di-metric-frame"><div className="management-stats compact">
                       <Metric
                         icon={Users}
                         label={t("Total members")}
                         value={c.members}
                       />
                       <Metric icon={User} label={t("Users")} value={c.users} />
-                    </div>
+                    </div></div>
                     <dl className="management-detail-grid">
                       {[
                         ["Workspace ID", c.id],

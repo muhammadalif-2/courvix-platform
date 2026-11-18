@@ -20,6 +20,7 @@ import {
   CheckCircle2,
   Dumbbell,
 } from "lucide-react";
+import {useScene,AnimatedNumber} from "./scene-motion";
 import { BrandLogo } from "@/components/brand";
 import { useModalKeyboard } from "./modal-keyboard";
 import "./product-explorer.css";
@@ -778,6 +779,7 @@ export function ProductExplorer({
   );
 }
 export function ExperienceShowcase() {
+  const clientScene=useScene(3,7500),reviewScene=useScene(3,8500),hqScene=useScene(2,9500);
   return (
     <section className="m-section premium-experiences">
       <div className="premium-section-heading">
@@ -791,7 +793,7 @@ export function ExperienceShowcase() {
         </p>
       </div>
       <div className="experience-bento">
-        <article className="experience-client">
+        <article className="experience-client" ref={clientScene.ref} data-scene={clientScene.step}>
           <div>
             <span>01 / THE CLIENT PORTAL</span>
             <h3>
@@ -820,15 +822,15 @@ export function ExperienceShowcase() {
               Keep moving forward.
             </h4>
             <div className="phone-balance">
-              <strong>5</strong>
+              <strong><AnimatedNumber value={5} animate={clientScene.animated}/></strong>
               <span>
                 sessions available
                 <br />
-                <small>1 more reserved</small>
+                <small>{clientScene.step===2?"0 reserved · outcome recorded":"1 more reserved"}</small>
               </span>
             </div>
             <div className="phone-session">
-              <span>NEXT APPOINTMENT</span>
+              <span>{["NEXT APPOINTMENT","IN SESSION / EXAMPLE","RECORDED OUTCOME"][clientScene.step]}</span>
               <b>Strength & conditioning</b>
               <p>
                 <Clock3 size={11} />
@@ -840,8 +842,9 @@ export function ExperienceShowcase() {
               Open appointments <ArrowRight size={12} />
             </a>
           </div>
+          <div className="as-card-stage-controls" role="group" aria-label="Client portal example stages">{["Upcoming","Training","Outcome"].map((label,i)=><button key={label} aria-pressed={clientScene.step===i} onClick={()=>clientScene.choose(i)}><i>{i+1}</i>{label}</button>)}</div>
         </article>
-        <article className="experience-review">
+        <article className="experience-review" ref={reviewScene.ref} data-scene={reviewScene.step}>
           <span>02 / PAYMENT CLARITY</span>
           <h3>
             A reference isn’t a receipt.
@@ -858,27 +861,15 @@ export function ExperienceShowcase() {
               <b>Jamie Lee</b>
               <small>8-session training pack</small>
             </div>
-            <span className="fx-pill neutral">Review</span>
+            <span className="fx-pill neutral">{["Under review","Receipt check","Verified example"][reviewScene.step]}</span>
           </div>
-          <div className="experience-review-steps">
-            <span>
-              <Check size={13} />
-              Reference received
-            </span>
-            <span>
-              <Search size={13} />
-              Check bank receipt
-            </span>
-            <span>
-              <Ticket size={13} />
-              Activate credits
-            </span>
-          </div>
+          <div className="experience-review-steps as-review-steps" role="group" aria-label="Sample payment review stage">{["Reference received","Check bank receipt","Activate credits"].map((label,i)=><button key={label} aria-pressed={reviewScene.step===i} onClick={()=>reviewScene.choose(i)}>{i===0?<Check size={14}/>:i===1?<Search size={14}/>:<Ticket size={14}/>}<span>{label}</span></button>)}</div>
+          <p className="as-review-note">{["A submitted reference is waiting for an authorized review.","The actual bank receipt must be checked before approval.","Illustrative result after verification: the purchased credits activate."][reviewScene.step]}</p>
           <a href={demoLink("training", "PTPayments")}>
             Explore payment review <ArrowUpRight size={16} />
           </a>
         </article>
-        <article className="experience-hq">
+        <article className="experience-hq" ref={hqScene.ref} data-branch={hqScene.step}>
           <div>
             <span>03 / OWNER OVERSIGHT</span>
             <h3>
@@ -902,14 +893,8 @@ export function ExperienceShowcase() {
             </div>
             <span />
             <div>
-              <p>
-                <MapPin size={14} />
-                Central <b>86 members</b>
-              </p>
-              <p>
-                <MapPin size={14} />
-                East <b>42 members</b>
-              </p>
+              {[{name:"Central",members:86},{name:"East",members:42}].map((branch,i)=><button key={branch.name} aria-pressed={hqScene.step===i} onClick={()=>hqScene.choose(i)}><MapPin size={14}/>{branch.name}<b>{branch.members} members</b></button>)}
+              <div className="as-branch-detail" key={hqScene.step}><span>SELECTED LOCATION / SAMPLE</span><strong>{hqScene.step===0?"Central":"East"}</strong><p>{hqScene.step===0?86:42} member profiles · records and access stay separate from the other location.</p></div>
             </div>
           </div>
         </article>

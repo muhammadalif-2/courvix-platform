@@ -10,6 +10,7 @@ import {
   Pause,
 } from "lucide-react";
 import "./media-showcase.css";
+import { TrainingDayStory } from "./public-scenes";
 import media from "@/public/media/media-manifest.json";
 const demoFilm = media.videos[0];
 const teaserFilm = media.videos[1];
@@ -148,128 +149,7 @@ export function DemoVideo() {
     </section>
   );
 }
-export function SportsStory() {
-  const [sport, setSport] = useState(0),
-    [paused, setPaused] = useState(false);
-  const names = ["Court sports", "Track & endurance", "Personal training"];
-  return (
-    <section
-      className={"m-section sports-story " + (paused ? "motion-paused" : "")}
-    >
-      <div className="sports-stage">
-        <img
-          src="/courvix-track.webp"
-          alt="Athlete training on an outdoor track"
-          loading="lazy"
-        />
-        <div className="sports-stage-shade" />
-        <svg viewBox="0 0 600 540" className="sports-motion" aria-hidden="true">
-          <defs>
-            <linearGradient id="sport-line">
-              <stop stopColor="#ffb276" />
-              <stop offset="1" stopColor="#fff1d9" />
-            </linearGradient>
-          </defs>
-          {sport === 0 ? (
-            <g className="court-animation">
-              <rect x="75" y="100" width="450" height="350" rx="12" />
-              <path d="M300 100V450M75 275H525M190 275a110 110 0 1 0 220 0a110 110 0 1 0 -220 0" />
-              <circle className="sport-ball" cx="300" cy="275" r="18" />
-              <path className="sport-trail" d="M130 370Q300 90 465 220" />
-            </g>
-          ) : sport === 1 ? (
-            <g className="track-animation">
-              {[0, 1, 2, 3].map((i) => (
-                <path
-                  key={i}
-                  d={
-                    "M" +
-                    (90 + i * 55) +
-                    " 450Q" +
-                    (30 + i * 55) +
-                    " 150 " +
-                    (360 + i * 55) +
-                    " 90"
-                  }
-                />
-              ))}
-              <g className="sport-runner">
-                <circle cx="310" cy="200" r="20" />
-                <path d="M300 225L280 305M300 235L355 265L380 225M290 245L245 270L220 240M280 305L330 350L370 335M280 305L235 365L190 365" />
-              </g>
-            </g>
-          ) : (
-            <g className="strength-animation">
-              <path d="M90 390H510" />
-              <circle cx="300" cy="180" r="22" />
-              <path d="M300 205L300 300M300 230L240 255L230 205M300 230L360 255L370 205M300 300L245 350L230 390M300 300L355 350L370 390" />
-              <g className="sport-barbell">
-                <path d="M170 170H430M190 135V205M210 145V195M390 145V195M410 135V205" />
-              </g>
-            </g>
-          )}
-        </svg>
-        <div className="sports-stage-caption">
-          <span>THE SPORT CHANGES.</span>
-          <strong>
-            The work behind it
-            <br />
-            deserves clarity.
-          </strong>
-        </div>
-        <button
-          className="sports-pause"
-          onClick={() => setPaused(!paused)}
-          aria-label={
-            paused ? "Resume sports animation" : "Pause sports animation"
-          }
-        >
-          {paused ? <Play size={15} /> : <Pause size={15} />}
-        </button>
-      </div>
-      <div className="sports-story-copy">
-        <span className="m-eyebrow">BUILT AROUND THE WAY YOU COACH</span>
-        <h2>
-          Different disciplines.
-          <br />A shared need for clarity.
-        </h2>
-        <p>
-          Behind the next practice, race or personal milestone are people,
-          schedules and payment records. Give that work a clear home.
-        </p>
-        <div
-          className="sports-story-tabs"
-          role="group"
-          aria-label="Sport illustration"
-        >
-          {names.map((name, i) => (
-            <button
-              key={name}
-              aria-pressed={sport === i}
-              onClick={() => setSport(i)}
-            >
-              {name}
-              <ArrowRight size={12} />
-            </button>
-          ))}
-        </div>
-        <p className="sports-feature-copy">
-          {sport === 0
-            ? "Keep team rosters, coach assignments, training sessions and recurring dues together."
-            : sport === 1
-              ? "Organize training groups, session attendance and the records behind consistent practice."
-              : "Connect client goals, session packs, appointments and recorded progress."}
-        </p>
-        <a
-          className="m-text-link"
-          href={sport === 2 ? "/personal-training" : "/clubs"}
-        >
-          Explore the workflow <ArrowUpRight size={16} />
-        </a>
-      </div>
-    </section>
-  );
-}
+export function SportsStory() { return <TrainingDayStory/>; }
 export function SocialTeaser() {
   return (
     <section className="m-section social-teaser" id="teaser">

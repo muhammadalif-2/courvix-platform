@@ -36,6 +36,7 @@ import ReferenceHome from "./reference-home";
 import PricingExperience from "./pricing-experience";
 import {PublicInteractiveGuide} from "./interactive-guides";
 import PublicScrollTop from "./public-scroll-top";
+import {AnimatedWorkspacePreview,AllSportsCatalog,ProductFlows,OperationsBenefits} from "./public-scenes";
 const clubDemo = "/demo?product=club&role=Owner";
 const ptDemo = "/demo?product=training&workspace=demo-nusa&role=Owner";
 const faqs = [
@@ -69,7 +70,14 @@ const faqs = [
   ],
 ];
 export function PublicHeader({ active = "" }: { active?: string }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false), [scrolled,setScrolled] = useState(false);
+  useEffect(() => {
+    let frame=0;
+    const update=()=>{frame=0;const next=window.scrollY>28;setScrolled(old=>old===next?old:next)};
+    const scroll=()=>{if(!frame)frame=requestAnimationFrame(update)};
+    update();window.addEventListener("scroll",scroll,{passive:true});
+    return()=>{window.removeEventListener("scroll",scroll);if(frame)cancelAnimationFrame(frame)};
+  },[]);
   useEffect(() => {
     if (!open) return;
     const close = (e: KeyboardEvent) => {
@@ -79,7 +87,7 @@ export function PublicHeader({ active = "" }: { active?: string }) {
     return () => window.removeEventListener("keydown", close);
   }, [open]);
   return (
-    <header className="site-header">
+    <header className="site-header" data-scrolled={scrolled}>
       <a href="/" className="site-brand" aria-label="Courvix home">
         <BrandLogo />
       </a>
@@ -248,179 +256,10 @@ export function ProductCards({ demo = false }: { demo?: boolean }) {
     </div>
   );
 }
-function ProductPreview({
-  product,
-  onChange,
-}: {
-  product: string;
-  onChange: (p: string) => void;
-}) {
-  const pt = product === "training";
-  return (
-    <div className="product-stage">
-      <div
-        className="preview-product-tabs"
-        role="group"
-        aria-label="Sample product"
-      >
-        <button aria-pressed={!pt} onClick={() => onChange("club")}>
-          <Users size={15} />
-          Club Management
-        </button>
-        <button aria-pressed={pt} onClick={() => onChange("training")}>
-          <Dumbbell size={15} />
-          Personal Training
-        </button>
-      </div>
-      <div className="preview-app" aria-label="Illustrative workspace preview">
-        <div className="preview-side">
-          <BrandLogo compact />
-          <span className="preview-side-active">
-            <LayoutDashboard size={16} />
-          </span>
-          <Users size={16} />
-          <CalendarDays size={16} />
-          <Wallet size={16} />
-          <Activity size={16} />
-        </div>
-        <div className="preview-workspace">
-          <div className="preview-topline">
-            <span>{pt ? "PACE TRAINING STUDIO" : "NORTHSIDE SPORTS CLUB"}</span>
-            <span className="preview-avatar">JD</span>
-          </div>
-          <div className="preview-greeting">
-            <div>
-              <small>YOUR WORKSPACE, AT A GLANCE</small>
-              <h3>
-                {pt
-                  ? "Every session, accounted for."
-                  : "A clear view of your club."}
-              </h3>
-            </div>
-            <span className="preview-date">
-              <CalendarDays size={13} />
-              Today
-            </span>
-          </div>
-          <div className="preview-stats">
-            {(pt
-              ? [
-                  ["Active clients", "24", "On their training journey"],
-                  ["Sessions today", "6", "Time to make progress"],
-                  ["Payments to review", "2", "Ready for your attention"],
-                ]
-              : [
-                  ["Active members", "128", "Across your training groups"],
-                  ["Sessions today", "4", "Your coaches have the plan"],
-                  ["Payments to review", "5", "Ready for your attention"],
-                ]
-            ).map(([label, value, note]) => (
-              <div key={label}>
-                <span>{label}</span>
-                <strong>
-                  {value}
-                  <i>
-                    <ArrowUpRight size={14} />
-                  </i>
-                </strong>
-                <small>{note}</small>
-              </div>
-            ))}
-          </div>
-          <div className="preview-agenda">
-            <div className="preview-block-heading">
-              <b>{pt ? "Today’s appointments" : "Today’s training"}</b>
-              <span>
-                View schedule <ArrowRight size={12} />
-              </span>
-            </div>
-            {(pt
-              ? [
-                  [
-                    "09:00",
-                    "Strength & conditioning",
-                    "Alex Morgan · Private session",
-                    "Confirmed",
-                  ],
-                  [
-                    "11:00",
-                    "Movement foundations",
-                    "Jamie Lee · 8-session pack",
-                    "Confirmed",
-                  ],
-                  [
-                    "16:00",
-                    "Small-group strength",
-                    "Studio A · 4 / 6 places",
-                    "Scheduled",
-                  ],
-                ]
-              : [
-                  [
-                    "09:00",
-                    "U-16 basketball",
-                    "Coach Alex · Court 1",
-                    "Scheduled",
-                  ],
-                  [
-                    "11:00",
-                    "Junior swimming",
-                    "Coach Jamie · Pool A",
-                    "Scheduled",
-                  ],
-                  [
-                    "16:00",
-                    "Evening badminton",
-                    "Coach Sam · Hall 2",
-                    "Scheduled",
-                  ],
-                ]
-            ).map(([time, title, subtitle, status]) => (
-              <div className="preview-appointment" key={time}>
-                <time>{time}</time>
-                <span className="preview-session-mark" />
-                <div>
-                  <b>{title}</b>
-                  <small>{subtitle}</small>
-                </div>
-                <span className="preview-status">{status}</span>
-              </div>
-            ))}
-          </div>
-          <div className="preview-bottom">
-            <span>
-              <ShieldCheck size={13} />
-              The right view for every role
-            </span>
-            <a href={pt ? ptDemo : clubDemo}>
-              Try this workspace <ArrowUpRight size={13} />
-            </a>
-          </div>
-        </div>
-      </div>
-      <div className="preview-floating">
-        <span className="preview-check">
-          <Check size={18} />
-        </span>
-        <div>
-          <b>
-            {pt
-              ? "Session complete. Progress recorded."
-              : "Payment reviewed. Records updated."}
-          </b>
-          <small>
-            {pt
-              ? "One credit used. Seven sessions to go."
-              : "Your member can see the latest status."}
-          </small>
-        </div>
-      </div>
-      <p className="preview-disclosure">
-        ILLUSTRATIVE SAMPLE DATA · EXPLORE THE INTERACTIVE DEMO
-      </p>
-    </div>
-  );
+function ProductPreview({product,onChange}:{product:string;onChange:(p:string)=>void}) {
+ return <AnimatedWorkspacePreview key={product} product={product} onChange={onChange}/>;
 }
+
 function SectionHeading({
   label,
   title,
@@ -691,6 +530,7 @@ export default function Marketing({ page = "home" }: { page?: string }) {
             ))}
           </div>
         )}
+        {club && <AllSportsCatalog/>}
         <PublicInteractiveGuide page={page}/>
         {(home || detail || page === "products" || page === "platform") && (
           <ProductExplorer
@@ -706,42 +546,7 @@ export default function Marketing({ page = "home" }: { page?: string }) {
           />
         )}
         {(home || page === "platform" || page === "products") && <DemoVideo />}
-        {(home || page === "platform") && (
-          <section className="m-section m-problem">
-            <SectionHeading
-              label="THE WORK AROUND THE WORKOUT"
-              title="The session is simple. Everything around it gets complicated."
-              text="The roster is in a spreadsheet. Changes are in the group chat. Payment notes are somewhere else. Courvix brings the next action into view."
-            />
-            <div className="m-benefit-grid">
-              {[
-                [
-                  Users,
-                  "Know who belongs where.",
-                  "Keep profiles, invitations and role-based access connected to your roster.",
-                ],
-                [
-                  CalendarDays,
-                  "Make the next session obvious.",
-                  "Give your people a clear time, place and coach, with attendance or appointment records.",
-                ],
-                [
-                  Wallet,
-                  "Have clearer payment conversations.",
-                  "Separate unpaid, under-review and verified payments so everyone knows the status.",
-                ],
-              ].map(([Icon, title, text]: any) => (
-                <article key={title}>
-                  <span>
-                    <Icon size={23} />
-                  </span>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </article>
-              ))}
-            </div>
-          </section>
-        )}
+        {(home || page === "platform") && <OperationsBenefits/>}
         {(home || page === "products" || page === "sports") && (
           <section className="m-section m-products-section" id="products">
             <SectionHeading
@@ -752,33 +557,7 @@ export default function Marketing({ page = "home" }: { page?: string }) {
             <ProductCards />
           </section>
         )}
-        {(detail || page === "platform") && (
-          <section className="m-section">
-            <SectionHeading
-              label="FROM FIRST INVITATION TO NEXT SESSION"
-              title={
-                training
-                  ? "A paid pack becomes a plan."
-                  : "Keep the whole journey connected."
-              }
-              text={
-                training
-                  ? "One balance connects the purchase, the booking and the completed session."
-                  : "Your staff and members see the parts of the workflow that belong to them."
-              }
-            />
-            <Workflow training={training} />
-            {page === "platform" && (
-              <>
-                <div className="m-subheading">
-                  <Dumbbell size={20} />
-                  <h3>Personal Training has its own journey.</h3>
-                </div>
-                <Workflow training />
-              </>
-            )}
-          </section>
-        )}
+        {(detail || page === "platform") && <ProductFlows product={detail?(training?"training":"club"):undefined}/>}
         {detail && (
           <section className="m-section m-detail-features">
             <SectionHeading
