@@ -1217,7 +1217,7 @@ export default function Courvix({
                   ? "Help your team grow"
                   : role === "Member"
                     ? "Ready for your next session"
-                    : `Selamat datang, ${identity?.name || "tim"}`}
+                    : `Welcome back, ${identity?.name || "team"}`}
               <span className="orange">.</span>
             </h1>
             <p>
@@ -2226,7 +2226,7 @@ export default function Courvix({
               </button>
             </SidebarFooter>
           </Sidebar>
-          <main className="workspace">
+          <main className="workspace" data-workspace-role={identity.isOwner ? "Owner" : role}>
             <header className="topbar">
               <div className="breadcrumb">
                 <SidebarTrigger />

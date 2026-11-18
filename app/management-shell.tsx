@@ -8,6 +8,7 @@ import WorkspaceCommand, {
   type WorkspaceCommandItem,
 } from "./workspace-command";
 import { Avatar } from "./account-profile";
+import { useModalKeyboard } from "./modal-keyboard";
 export function ManagementShell({
   children,
   title,
@@ -38,6 +39,7 @@ export function ManagementShell({
   const { t } = usePreferences(),
     request = useAppRequest(),
     [open, setOpen] = useState(false),
+    [mobile, setMobile] = useState(false),
     [account, setAccount] = useState<any>(null);
   useEffect(() => {
     const refresh = () =>
@@ -50,19 +52,29 @@ export function ManagementShell({
     return () => window.removeEventListener("courvix-account-updated", refresh);
   }, []);
   useEffect(() => {
-    if (!open) return;
-    const close = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+    const viewport = window.matchMedia("(max-width: 900px)");
+    const sync = () => {
+      setMobile(viewport.matches);
+      if (!viewport.matches) setOpen(false);
     };
-    window.addEventListener("keydown", close);
-    return () => window.removeEventListener("keydown", close);
-  }, [open]);
+    sync();
+    viewport.addEventListener("change", sync);
+    return () => viewport.removeEventListener("change", sync);
+  }, []);
+  useModalKeyboard(open && mobile, () => setOpen(false));
   return (
-    <div className="management-shell">
+    <div className="management-shell" data-workspace-role={platform ? "Courvix owner" : roleLabel || "Owner"}>
       <a className="cv-skip" href="#workspace-content">
         Skip to workspace content
       </a>
-      <aside className={"management-sidebar " + (open ? "mobile-open" : "")}>
+      <aside
+        id="management-navigation"
+        className={"management-sidebar " + (open ? "mobile-open" : "")}
+        role={mobile && open ? "dialog" : undefined}
+        aria-modal={mobile && open ? true : undefined}
+        aria-label="Workspace navigation"
+        inert={mobile && !open ? true : undefined}
+      >
         <a href="/" className="management-brand">
           <BrandLogo />
         </a>
@@ -170,6 +182,7 @@ export function ManagementShell({
               className="mobile-nav-open"
               aria-label="Open navigation"
               aria-expanded={open}
+              aria-controls="management-navigation"
               onClick={() => setOpen(true)}
             >
               <Menu size={20} />

@@ -4,6 +4,7 @@ import "./dashboard-theme.css";
 import "./market-growth.css";
 import "./onboarding.css";
 import "./access.css";
+import "./experience-system.css";
 import { PreferencesProvider } from "./preferences";
 
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ export default function RootLayout({
       <head>
         <link rel="stylesheet" href="/inter-font.css" />
       </head>
-      <body className="antialiased">
+      <body className="courvix-ui antialiased" id="courvix-top">
         <PreferencesProvider>{children}</PreferencesProvider>
       </body>
     </html>

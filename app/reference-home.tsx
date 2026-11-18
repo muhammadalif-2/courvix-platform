@@ -21,6 +21,7 @@ import { ProductExplorer, ProductOverviewPreview } from "./product-explorer";
 import { DemoVideo } from "./media-showcase";
 import "./reference-home.css";
 import {ConnectedOperations,ConfidenceLinks} from "./market-growth";
+import {RoleDayGuide} from "./interactive-guides";
 
 type Product = "club" | "training";
 const demo = (product: Product, role = "Owner", module = "ControlRoom") =>
@@ -776,6 +777,7 @@ export default function ReferenceHome({
           </div>
         </section>
 
+        <div className="r-container r-section"><RoleDayGuide/></div>
         <div className="r-container r-section"><ConfidenceLinks/></div>
         <div className="r-faq-wrap r-container">{faq}</div>
         <section className="r-closing r-container">

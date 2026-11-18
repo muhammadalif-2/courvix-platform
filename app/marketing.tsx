@@ -34,6 +34,8 @@ import "./premium.css";
 import { DemoVideo, SportsStory, SocialTeaser } from "./media-showcase";
 import ReferenceHome from "./reference-home";
 import PricingExperience from "./pricing-experience";
+import {PublicInteractiveGuide} from "./interactive-guides";
+import PublicScrollTop from "./public-scroll-top";
 const clubDemo = "/demo?product=club&role=Owner";
 const ptDemo = "/demo?product=training&workspace=demo-nusa&role=Owner";
 const faqs = [
@@ -128,7 +130,7 @@ export function PublicHeader({ active = "" }: { active?: string }) {
 }
 export function PublicFooter() {
   return (
-    <footer className="site-footer">
+    <><footer className="site-footer">
       <div className="footer-top">
         <div>
           <a href="/" aria-label="Courvix home">
@@ -177,7 +179,7 @@ export function PublicFooter() {
         <a href="/privacy">Privacy</a>
         <a href="/policies">All policies</a>
       </div>
-    </footer>
+    </footer><PublicScrollTop/></>
   );
 }
 export function ProductCards({ demo = false }: { demo?: boolean }) {
@@ -688,6 +690,7 @@ export default function Marketing({ page = "home" }: { page?: string }) {
             ))}
           </div>
         )}
+        <PublicInteractiveGuide page={page}/>
         {(home || detail || page === "products" || page === "platform") && (
           <ProductExplorer
             product={
